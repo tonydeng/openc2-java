@@ -1,5 +1,6 @@
 package com.github.tonydeng.openc2.header;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +21,8 @@ public class Header {
     private String sender;      //  The Message Sender
     private String contentType; // The type and version of the message body
 
-
-    public boolean isEmpty() {
+    @JSONField(serialize = false)
+    public final boolean isEmpty() {
         return StringUtils.isEmpty(version)
                 && StringUtils.isEmpty(commandId) && StringUtils.isEmpty(created)
                 && StringUtils.isEmpty(sender) && StringUtils.isEmpty(contentType);
