@@ -1,4 +1,4 @@
-package com.github.tonydeng.openc2.utils;
+package com.github.tonydeng.openc2.utilities;
 
 public enum StatusCode {
   /**
