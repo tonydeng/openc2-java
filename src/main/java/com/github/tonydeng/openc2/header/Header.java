@@ -15,16 +15,32 @@ import org.apache.commons.lang3.StringUtils;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Header {
-    private String version; // Message Protocol version
-    private String commandId;   // The Message Command ID
-    private String created;     // Creation date/time of the content
-    private String sender;      //  The Message Sender
-    private String contentType; // The type and version of the message body
 
-    @JSONField(serialize = false)
-    public final boolean isEmpty() {
-        return StringUtils.isEmpty(version)
-                && StringUtils.isEmpty(commandId) && StringUtils.isEmpty(created)
-                && StringUtils.isEmpty(sender) && StringUtils.isEmpty(contentType);
-    }
+  /**
+   * Message Protocol version
+   */
+  private String version;
+  /**
+   * The Message Command ID
+   */
+  private String commandId;
+  /**
+   * Creation date/time of the content
+   */
+  private String created;
+  /**
+   * The Message Sender
+   */
+  private String sender;
+  /**
+   * The type and version of the message body
+   */
+  private String contentType;
+
+  @JSONField(serialize = false)
+  public final boolean isEmpty() {
+    return StringUtils.isEmpty(version)
+        && StringUtils.isEmpty(commandId) && StringUtils.isEmpty(created)
+        && StringUtils.isEmpty(sender) && StringUtils.isEmpty(contentType);
+  }
 }
