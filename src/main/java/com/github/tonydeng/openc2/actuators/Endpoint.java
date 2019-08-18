@@ -1,5 +1,6 @@
 package com.github.tonydeng.openc2.actuators;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.github.tonydeng.openc2.utilities.Keys;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
 
@@ -30,6 +31,7 @@ public class Endpoint extends OpenC2Map<ActuatorType> {
         setEndpoint(endpoint);
     }
 
+    @JsonSetter(Keys.ACTUATOR_ID)
     public void setEndpoint(String endpoint) {
         super.put(Keys.ACTUATOR_ID, endpoint);
     }
@@ -37,6 +39,4 @@ public class Endpoint extends OpenC2Map<ActuatorType> {
     public String getEndpoint() {
         return super.get(Keys.ACTUATOR_ID).toString();
     }
-
-
 }

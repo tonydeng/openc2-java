@@ -7,10 +7,10 @@ import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.actuators.ActuatorType;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.OpenC2MessageDeserializer;
+import com.github.tonydeng.openc2.json.JsonFormatter;
 import com.github.tonydeng.openc2.json.OpenC2MessageSerializer;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
-import com.github.tonydeng.openc2.json.JsonFormatter;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,8 +23,7 @@ import org.apache.commons.lang3.StringUtils;
  **/
 @Getter
 @JsonSerialize(using = OpenC2MessageSerializer.class)
-//@JsonDeserialize(using = OpenC2MessageDeserializer.class);
-@JsonDeserialize
+@JsonDeserialize(using = OpenC2MessageDeserializer.class)
 public class OpenC2Message {
 
     private String id;
