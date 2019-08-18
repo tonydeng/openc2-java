@@ -22,9 +22,9 @@ public class HeaderTest {
 
     @Test
     void testEquals() {
-        Header header = new Header(
-                VERSION, ID, CREATED, SENDER, CONTENT
-        );
+        Header header = new Header().setCommandId(ID)
+                .setContentType(CONTENT).setVersion(VERSION)
+                .setCreated(CREATED).setSender(SENDER);
 
         assertEquals(VERSION, header.getVersion());
         assertEquals(ID, header.getCommandId());
@@ -47,9 +47,8 @@ public class HeaderTest {
 
         assertTrue(header.isEmpty());
 
-        header = Header.builder().version("")
-                .commandId("").created("").sender("")
-                .build();
+        header = new Header().setVersion("")
+                .setCommandId("").setCreated("").setSender("");
 
         assertTrue(header.isEmpty());
     }
