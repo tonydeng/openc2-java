@@ -113,19 +113,18 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
         return message;
     }
 
+    /**
+     * Set Actuator to OpenC2Message
+     *
+     * @param actuatorNode Target Jacksn JsonNode
+     * @param message      set to OpenC2Message
+     * @param mapper       Jackson ObjectMapper
+     * @throws IOException
+     */
     private void setActuator(JsonNode actuatorNode, OpenC2Message message, ObjectMapper mapper) throws IOException {
-        JsonParser actuatorParser;
-        String actuatorName = actuatorNode.fieldNames().next();
 
-        if (actuatorNode.get(actuatorName).isObject()) {
-            actuatorParser = new JsonFactory().createParser(
-                    mapper.writeValueAsString(actuatorNode.get(actuatorName))
-            );
-        } else {
-            actuatorParser = new JsonFactory().createParser(
-                    mapper.writeValueAsString(actuatorNode)
-            );
-        }
+        String actuatorName = actuatorNode.fieldNames().next();
+        final JsonParser actuatorParser = getJsonParser(actuatorNode, actuatorName, mapper);
 
         try {
             Class<?> clazz = Class.forName(getActuatorClassName(actuatorName));
@@ -144,18 +143,10 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
      * @throws IOException
      */
     private void setTarget(JsonNode targetNode, OpenC2Message message, ObjectMapper mapper) throws IOException {
-        JsonParser targetParser;
+
         String targetName = targetNode.fieldNames().next();
-        if (targetNode.get(targetName).isObject()) {
-            targetParser = new JsonFactory()
-                    .createParser(
-                            mapper.writeValueAsString(targetNode.get(targetName))
-                    );
-        } else {
-            targetParser = new JsonFactory().createParser(
-                    mapper.writeValueAsString(targetNode)
-            );
-        }
+
+        final JsonParser targetParser = getJsonParser(targetNode, targetName, mapper);
 
         try {
             Class<?> clazz = Class.forName(getTargetClassName(targetName));
@@ -163,6 +154,31 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
         } catch (ClassNotFoundException e) {
             throw new IOException("Unknown target type '" + getTargetClassName(targetName) + "' found in JSON");
         }
+    }
+
+    /**
+     * Gets a JsonParser based on the JsonNode
+     *
+     * @param node   Target JsonNode
+     * @param name   node name
+     * @param mapper Jackson ObjectMapper
+     * @return the Target JsonNode JsonParser
+     * @throws IOException
+     */
+    private JsonParser getJsonParser(JsonNode node, String name, ObjectMapper mapper) throws IOException {
+        final JsonParser parser;
+
+        if (node.get(name).isObject()) {
+            parser = new JsonFactory().createParser(
+                    mapper.writeValueAsString(node.get(name))
+            );
+        } else {
+            parser = new JsonFactory().createParser(
+                    mapper.writeValueAsString(node)
+            );
+        }
+
+        return parser;
     }
 
     /**
