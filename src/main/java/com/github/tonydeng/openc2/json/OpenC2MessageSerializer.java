@@ -20,7 +20,8 @@ import java.util.Map;
 @Slf4j
 public class OpenC2MessageSerializer extends JsonSerializer<OpenC2Message> {
     @Override
-    public void serialize(OpenC2Message message, JsonGenerator generator, SerializerProvider provider) throws IOException {
+    public void serialize(OpenC2Message message, JsonGenerator generator, SerializerProvider provider)
+            throws IOException {
         log.debug("openc2 message serializer start......");
         generator.writeStartObject();
 
@@ -53,7 +54,7 @@ public class OpenC2MessageSerializer extends JsonSerializer<OpenC2Message> {
             Map<String, Object> actuator = message.getActuator().getAll();
 
             if (actuator.get(actuatorType) == null) {
-                generator.writeObjectFieldStart(Keys.ACTION);
+                generator.writeObjectFieldStart(Keys.ACTUATOR);
                 generator.writeObjectField(actuatorType, actuator);
                 generator.writeEndObject();
             } else {
