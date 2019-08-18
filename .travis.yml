@@ -1,0 +1,21 @@
+dist: trusty
+sudo: required
+language: java
+jdk:
+  - oraclejdk8
+
+addons:
+  sonarcloud:
+    organization: "tonydeng-github"
+    token:
+      secure: "MKyfvmztiseY6TKRX3pe7lg4mqHmChiVKLWZxTtRxxGtDhf5QB6LBDIO7slUGpn+UvI3XMSkf6U/BSDxeSeB2Yv2UxzDzoSXTyG99azVVAOfqKobjeQfaW7URvGtNNS5bjBWp6CqeGogFiKd6AuPKiV+aP8pgRAJwrDtTuZoN0FVNP1Kh7uVOPxZ9pkZ2+E6eW6Ckv6uacCvN6x2J7V1u2u/hSar+3cVoZSSz5GR1DQQyI1ioI3WRl25fcQZHKSKu3mLVN1OPxw6LsPRQQQyNEF4T4dIiTW1KUi+GVhXJlaJaKkZc5Fg5QDYqThCq9HckhcDEJBWP5E4j8IkNr4SQ1J+GtMIKrAUlc6EVBGSM7MvtCmYrXIuOwTnlZ+pyYF3vth3RfqSENsgz8sG71/F/MINQAE/jCC54UBfsDMDiJ3eP9FhB08rkcy+vOyqiCWrLBVAOQkAxSGiuJCu4tgrBVShKbEl/QxwmNw+9L2JXNF1QV+6N6HjKohT86i+KiZ4GUBqMmO2+2CfGDHHlvrN5BJPAMt8vKlU0NkgGON/R6Sdf1CQICQcmkB1uVfyl5X/i1mU2p5y0Ho3UWUtEgw4FUiYO5X/yuKxa5Ai6MxqIQJY1g+Q/q8PTcxaJuBRefHa9qE8biRxSuZV1rxWzMn7rrMZGAqPkjc3BeFvIcn2FYQ="
+
+script:
+  # JaCoCo is used to have code coverage, the agent has to be activated
+  - mvn install -T20
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
