@@ -34,7 +34,7 @@ public class OpenC2MapTest {
 
     assertEquals("String", mapObject.getObjectType());
     assertEquals(Keys.ARGUMENTS, mapObject.getSectionType());
-    Map<String, String> map = mapObject.getAll();
+    Map<String, Object> map = mapObject.getAll();
     assertEquals(MAP1_VALUE, map.get(MAP1_KEY));
     assertEquals(MAP2_VALUE, map.get(MAP2_KEY));
     assertEquals(MAP3_VALUE, map.get(MAP3_KEY));

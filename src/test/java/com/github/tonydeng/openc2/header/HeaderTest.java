@@ -1,12 +1,10 @@
 package com.github.tonydeng.openc2.header;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author dengtao
@@ -34,7 +32,6 @@ public class HeaderTest {
         assertEquals(SENDER, header.getSender());
         assertEquals(CONTENT, header.getContentType());
 
-        log.info("{}", JSON.toJSONString(header, SerializerFeature.PrettyFormat));
 
         header.setVersion(VERSION2);
         header.setContentType(CONTENT2);
@@ -42,7 +39,6 @@ public class HeaderTest {
         assertEquals(VERSION2, header.getVersion());
         assertEquals(CONTENT2, header.getContentType());
 
-        log.info("{}", JSON.toJSONString(header, SerializerFeature.PrettyFormat));
     }
 
     @Test
