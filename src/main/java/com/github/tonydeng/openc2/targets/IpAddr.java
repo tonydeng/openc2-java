@@ -3,6 +3,8 @@ package com.github.tonydeng.openc2.targets;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
 
+import static com.github.tonydeng.openc2.targets.TargetType.IP_ADDR;
+
 /**
  * Implementation of an Ipv4Addr OpenC2 target
  *
@@ -12,21 +14,29 @@ import com.github.tonydeng.openc2.utilities.OpenC2Map;
  **/
 public class IpAddr extends OpenC2Map<TargetType> {
 
+    /**
+     * Constructor
+     */
     public IpAddr() {
-        super(TargetType.IP_ADDR);
+        super(IP_ADDR);
     }
 
+    /**
+     * Constructor
+     *
+     * @param ip IP to assign to the ip addr object
+     */
     public IpAddr(String ip) {
-        super(TargetType.IP_ADDR);
-
+        super(IP_ADDR);
+        setIpAddr(ip);
     }
 
     @JsonSetter("ip_addr")
     public void setIpAddr(String ip) {
-        super.put(TargetType.IP_ADDR.toString(), ip);
+        super.put(IP_ADDR.toString(), ip);
     }
 
     public String getIpAddr() {
-        return super.get(TargetType.IP_ADDR.toString()).toString();
+        return super.get(IP_ADDR.toString()).toString();
     }
 }

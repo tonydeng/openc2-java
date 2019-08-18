@@ -17,6 +17,7 @@
     <logback.version>1.2.3</logback.version>
     <guava.version>21.0</guava.version>
     <commons-lang3.version>3.9</commons-lang3.version>
+    <commons-text.vertsion>1.7</commons-text.vertsion>
     <!--        <fastjson.version>1.2.59</fastjson.version>-->
     <jackson-core.version>2.9.9</jackson-core.version>
     <jackson-annotations.version>2.9.9</jackson-annotations.version>
@@ -60,6 +61,11 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>${commons-text.vertsion}</version>
     </dependency>
     <!--    <dependency>-->
     <!--      <groupId>com.alibaba</groupId>-->
