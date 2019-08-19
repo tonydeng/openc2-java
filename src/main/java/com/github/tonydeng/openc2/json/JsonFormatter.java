@@ -18,6 +18,9 @@ import java.io.IOException;
  **/
 public class JsonFormatter {
 
+    private JsonFormatter() {
+    }
+
     /**
      * Convert an OpenC2Message object to a JSON string
      *

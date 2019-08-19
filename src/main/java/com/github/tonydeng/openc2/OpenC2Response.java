@@ -2,8 +2,12 @@ package com.github.tonydeng.openc2;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.JsonFormatter;
+import com.github.tonydeng.openc2.json.OpenC2ResponseDeserializer;
+import com.github.tonydeng.openc2.json.OpenC2ResponseSerializer;
 import com.github.tonydeng.openc2.utilities.StatusCode;
 import lombok.Getter;
 
@@ -14,6 +18,8 @@ import lombok.Getter;
  * @author dengtao
  **/
 @Getter
+@JsonSerialize(using = OpenC2ResponseSerializer.class)
+@JsonDeserialize(using = OpenC2ResponseDeserializer.class)
 public class OpenC2Response implements OpenC2Message {
     private Header header;
     private String id;
@@ -21,7 +27,6 @@ public class OpenC2Response implements OpenC2Message {
     private int status;
     private String statusText;
     private Object results;
-
     /**
      * This constructor only exists for Jackson processing and should
      * not be used directly
@@ -65,6 +70,11 @@ public class OpenC2Response implements OpenC2Message {
 
     public OpenC2Response setId(String id) {
         this.id = id;
+        return this;
+    }
+
+    public OpenC2Response setIdRef(String idRef) {
+        this.idRef = idRef;
         return this;
     }
 

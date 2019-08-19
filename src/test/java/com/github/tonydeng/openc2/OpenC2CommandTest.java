@@ -55,8 +55,6 @@ public class OpenC2CommandTest {
 
     @Test
     public void testCodeCoverage() throws Exception {
-        new Keys();
-        new JsonFormatter();
         StatusCode.valueOf("OK");
         StatusCode.OK.toString();
         TargetType.values();
