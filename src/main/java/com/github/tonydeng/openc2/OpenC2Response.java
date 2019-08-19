@@ -27,6 +27,7 @@ public class OpenC2Response implements OpenC2Message {
     private int status;
     private String statusText;
     private Object results;
+
     /**
      * This constructor only exists for Jackson processing and should
      * not be used directly

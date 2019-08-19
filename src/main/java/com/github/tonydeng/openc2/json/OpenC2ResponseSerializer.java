@@ -17,7 +17,8 @@ import java.io.IOException;
 @Slf4j
 public class OpenC2ResponseSerializer extends JsonSerializer<OpenC2Response> {
     @Override
-    public void serialize(OpenC2Response response, JsonGenerator generator, SerializerProvider provider) throws IOException {
+    public void serialize(OpenC2Response response, JsonGenerator generator, SerializerProvider provider)
+            throws IOException {
         log.debug("openc2 response serializer start......");
         generator.writeStartObject();
 

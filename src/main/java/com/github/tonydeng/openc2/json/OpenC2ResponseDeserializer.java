@@ -2,7 +2,6 @@ package com.github.tonydeng.openc2.json;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,7 +21,7 @@ import static com.github.tonydeng.openc2.utilities.Keys.*;
  **/
 public class OpenC2ResponseDeserializer extends JsonDeserializer<OpenC2Response> {
     @Override
-    public OpenC2Response deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+    public OpenC2Response deserialize(JsonParser parser, DeserializationContext context) throws IOException {
 
         OpenC2Response response = new OpenC2Response();
 
