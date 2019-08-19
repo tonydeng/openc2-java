@@ -49,12 +49,12 @@
 
 ### OpenC2协议层
 
-| 层 | 例子 |
+| 协议层 | 例子 |
 |--|--|
-| `Function-Specific Content` | 执行器配置文件 <br/> ([[OpenC2-SLPF-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-slpf-v10)],...)|
+| Function-Specific Content | 执行器配置文件 <br/> ([[OpenC2-SLPF-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-slpf-v10)],...)|
 | Common Content | 	Language Specification |
-| Message | Transfer Specifications <br/> ([[OpenC2-HTTPS-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-https-v10)], OpenC2-over-CoAP, ...) |
-| Secure Transport | HTTPS, CoAP, MQTT, OpenDXL, ... |
+| Message | Transfer Specifications <br/> ([[OpenC2-HTTPS-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-https-v10)], `OpenC2-over-CoAP`, ...) |
+| Secure Transport | `HTTPS`, `CoAP`, `MQTT`, `OpenDXL`, ... |
 
 ## OpenC2-Java模型
 
