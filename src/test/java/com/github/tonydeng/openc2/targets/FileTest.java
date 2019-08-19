@@ -2,7 +2,7 @@ package com.github.tonydeng.openc2.targets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public class FileTest {
     @Test
     void test() throws IOException {
         File target = new File().setName(NAME_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target);
         log.info("{}", message.toPrettyJson());
         JsonNode expected = new ObjectMapper().readTree(expect);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
@@ -54,7 +54,7 @@ public class FileTest {
 
     @Test
     void testGetName() throws IOException {
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File) inMsg.getTarget();
 
@@ -64,14 +64,14 @@ public class FileTest {
     @Test
     void testHash() throws IOException {
         File target = new File().setHash(MAP_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target);
 
         JsonNode expected = new ObjectMapper().readTree(expect3);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
         assertEquals(expected, actual);
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect3);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect3);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File) inMsg.getTarget();
         assertEquals(MAP_VALUE, inTarget.getHashes());
@@ -80,13 +80,13 @@ public class FileTest {
     @Test
     void testAll() throws IOException {
         File target = new File().setName(NAME_VALUE).setPath(PATH_VALUE).setHash(MAP_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target);
 
         JsonNode expected = new ObjectMapper().readTree(expect4);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
         assertEquals(expected, actual);
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect4);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect4);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File)inMsg.getTarget();
         assertEquals(NAME_VALUE, inTarget.getName());

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.actuators.ActuatorType;
 import com.github.tonydeng.openc2.args.Args;
 import com.github.tonydeng.openc2.header.Header;
@@ -27,11 +27,11 @@ import static com.github.tonydeng.openc2.utilities.Keys.*;
  * @date 2019-08-18 15:27
  **/
 @Slf4j
-public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
+public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
     @Override
-    public OpenC2Message deserialize(JsonParser parser, DeserializationContext context) throws IOException {
-        log.debug("openc2 message deserialize start......");
-        OpenC2Message message = new OpenC2Message();
+    public OpenC2Command deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+        log.debug("openc2 command deserialize start......");
+        OpenC2Command message = new OpenC2Command();
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode nodes = parser.getCodec().readTree(parser);
@@ -72,11 +72,11 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
             }
 
         }
-        log.debug("openc2 message deserialize end......");
+        log.debug("openc2 command deserialize end......");
         return message;
     }
 
-    private OpenC2Message deserializeBody(String json, OpenC2Message message) throws IOException {
+    private OpenC2Command deserializeBody(String json, OpenC2Command message) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode nodes = mapper.readTree(json);
@@ -114,14 +114,14 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
     }
 
     /**
-     * Set Actuator to OpenC2Message
+     * Set Actuator to OpenC2Command
      *
      * @param actuatorNode Target Jacksn JsonNode
-     * @param message      set to OpenC2Message
+     * @param message      set to OpenC2Command
      * @param mapper       Jackson ObjectMapper
      * @throws IOException
      */
-    private void setActuator(JsonNode actuatorNode, OpenC2Message message, ObjectMapper mapper) throws IOException {
+    private void setActuator(JsonNode actuatorNode, OpenC2Command message, ObjectMapper mapper) throws IOException {
 
         String actuatorName = actuatorNode.fieldNames().next();
         final JsonParser actuatorParser = getJsonParser(actuatorNode, actuatorName, mapper);
@@ -135,14 +135,14 @@ public class OpenC2MessageDeserializer extends JsonDeserializer<OpenC2Message> {
     }
 
     /**
-     * Set Target to OpenC2Message
+     * Set Target to OpenC2Command
      *
      * @param targetNode Target Jackson JsonNode
-     * @param message    set to OpenC2Message
+     * @param message    set to OpenC2Command
      * @param mapper     Jaskcon ObjectMapper
      * @throws IOException
      */
-    private void setTarget(JsonNode targetNode, OpenC2Message message, ObjectMapper mapper) throws IOException {
+    private void setTarget(JsonNode targetNode, OpenC2Command message, ObjectMapper mapper) throws IOException {
 
         String targetName = targetNode.fieldNames().next();
 

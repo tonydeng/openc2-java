@@ -2,11 +2,10 @@ package com.github.tonydeng.openc2.actuators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 import com.github.tonydeng.openc2.targets.IpAddr;
-import lombok.ToString;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -30,14 +29,14 @@ public class NetworkTest {
     void test() throws IOException {
         IpAddr target = new IpAddr(IP_VALUE);
         Network actuator = new Network(NETWORK_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target).setActuator(actuator);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target).setActuator(actuator);
 
         JsonNode expected = new ObjectMapper().readTree(expect);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
         assertEquals(expected, actual);
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
         assertTrue(inMsg.getActuator() instanceof Network);
         Network inActuator = (Network) inMsg.getActuator();
         assertEquals(NETWORK_VALUE, inActuator.getNetwork());

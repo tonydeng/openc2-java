@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author dengtao
  **/
 @Slf4j
-public class OpenC2MessageTest {
+public class OpenC2CommandTest {
     private static final String IP_VALUE = "1.2.3.4";
     private static final String ID_VALUE = "TEST-id-1";
     private static final String ARG1_KEY = "start_time";
@@ -45,7 +45,7 @@ public class OpenC2MessageTest {
 
     @Test
     void testHeader() {
-        OpenC2Message message = new OpenC2Message();
+        OpenC2Command message = new OpenC2Command();
         message.setHeader(new Header());
 
 
@@ -64,7 +64,7 @@ public class OpenC2MessageTest {
         ActuatorType.values();
         ActuatorType.valueOf("ENDPOINT");
 
-        OpenC2Message message = new OpenC2Message("", ActionType.COPY, new IpAddr(IP_VALUE))
+        OpenC2Command message = new OpenC2Command("", ActionType.COPY, new IpAddr(IP_VALUE))
                 .setActuator(new NetworkSensor())
                 .setArgs(new Args());
         log.info("{}", message.toPrettyJson());
@@ -76,8 +76,8 @@ public class OpenC2MessageTest {
     @Test
     void testTest1Json() throws Exception {
 
-        OpenC2Message message = new OpenC2Message(ActionType.COPY, new IpAddr(IP_VALUE));
-        OpenC2Message message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE));
+        OpenC2Command message2 = JsonFormatter.readOpenC2Message(message.toJson());
 
         // Create JsonNode objects for comparison
         JsonNode messageJN = new ObjectMapper().readTree(message.toJson());
@@ -89,7 +89,7 @@ public class OpenC2MessageTest {
         assertEquals(messageJN, message3JN);  // Verify that the object from an external JSON string is the same
         assertNotEquals(messageJN,message4JN);
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test1Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test1Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertNull(inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -102,8 +102,8 @@ public class OpenC2MessageTest {
     @Test
      void testTestJson2() throws Exception {
 
-        OpenC2Message message = new OpenC2Message(ActionType.COPY, new IpAddr(IP_VALUE)).setId(ID_VALUE);
-        OpenC2Message message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE)).setId(ID_VALUE);
+        OpenC2Command message2 = JsonFormatter.readOpenC2Message(message.toJson());
 
         // Create JsonNode objects for comparison
         JsonNode messageJN = new ObjectMapper().readTree(message.toJson());
@@ -116,7 +116,7 @@ public class OpenC2MessageTest {
         assertNotEquals(messageJN, message4JN); // Verify that two different objects are not equal
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test2Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test2Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -129,8 +129,8 @@ public class OpenC2MessageTest {
     @Test
      void testTest3() throws Exception {
 
-        OpenC2Message message = new OpenC2Message(ActionType.COPY, new IpAddr(IP_VALUE)).setId(ID_VALUE).setActuator(new Endpoint(ENDPOINT_VALUE));
-        OpenC2Message message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE)).setId(ID_VALUE).setActuator(new Endpoint(ENDPOINT_VALUE));
+        OpenC2Command message2 = JsonFormatter.readOpenC2Message(message.toJson());
 
         // Create JsonNode objects for comparison
         JsonNode messageJN = new ObjectMapper().readTree(message.toJson());
@@ -143,7 +143,7 @@ public class OpenC2MessageTest {
         assertNotEquals(messageJN,message4JN); // Verify that two different objects are not equal
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test3Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test3Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -159,12 +159,12 @@ public class OpenC2MessageTest {
     @Test
     public void testTest4() throws Exception {
 
-        OpenC2Message message = new OpenC2Message(ActionType.COPY, new IpAddr(IP_VALUE))
+        OpenC2Command message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE))
                 .setId(ID_VALUE)
                 .setArgs(new Args()
                         .addArg(ARG1_KEY, ARG1_VALUE)
                         .addArg(ARG2_KEY, ARG2_VALUE));
-        OpenC2Message message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command message2 = JsonFormatter.readOpenC2Message(message.toJson());
 
         // Create JsonNode objects for comparison
         JsonNode messageJN = new ObjectMapper().readTree(message.toJson());
@@ -176,7 +176,7 @@ public class OpenC2MessageTest {
         assertEquals(messageJN, message3JN);  // Verify that the object from an external JSON string is the same
         assertNotEquals(messageJN,message4JN); // Verify that two different objects are not equal
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test4Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test4Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -192,9 +192,9 @@ public class OpenC2MessageTest {
     @Test
     public void testTest5() throws Exception {
 
-        OpenC2Message message = new OpenC2Message(ActionType.COPY, new IpAddr(IP_VALUE)).setHeader(new Header(VERSION_VALUE, CONTENT_VALUE).setCommandId(ID_VALUE));
+        OpenC2Command message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE)).setHeader(new Header(VERSION_VALUE, CONTENT_VALUE).setCommandId(ID_VALUE));
 
-        OpenC2Message message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command message2 = JsonFormatter.readOpenC2Message(message.toJson());
 
         // Create JsonNode objects for comparison
         JsonNode messageJN = new ObjectMapper().readTree(message.toJson());
@@ -207,7 +207,7 @@ public class OpenC2MessageTest {
         assertNotEquals(messageJN,message4JN); // Verify that two different objects are not equal
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test5Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test5Json);
         assertTrue(inMsg.hasHeader());
         assertEquals(VERSION_VALUE, inMsg.getHeader().getVersion());
         assertEquals(ID_VALUE, inMsg.getHeader().getCommandId());
@@ -223,7 +223,7 @@ public class OpenC2MessageTest {
 
     @Test
      void testTest6() throws Exception {
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(test6Json);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test6Json);
 
         assertTrue(inMsg.hasHeader());
         assertEquals(VERSION_VALUE, inMsg.getHeader().getVersion());

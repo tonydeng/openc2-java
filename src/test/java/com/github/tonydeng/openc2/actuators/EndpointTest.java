@@ -2,7 +2,7 @@ package com.github.tonydeng.openc2.actuators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.targets.IpAddr;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class EndpointTest {
     void test() throws IOException {
         IpAddr target = new IpAddr(IP_VALUE);
         Endpoint actuator = new Endpoint(ENDPOINT_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target).setActuator(actuator);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target).setActuator(actuator);
         log.info("{}", message.toJson());
 
         JsonNode expected = new ObjectMapper().readTree(expect);

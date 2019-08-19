@@ -2,7 +2,7 @@ package com.github.tonydeng.openc2.targets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,17 +27,17 @@ public class IpAddrTest {
     private static final String expect = "{\"action\":\"deny\",\"target\":{\"ip_addr\":\"1.2.3.4\"}}";
 
     private static IpAddr target;
-    private static OpenC2Message message;
+    private static OpenC2Command message;
 
     @BeforeAll
     static void setUp() {
         target = new IpAddr(IP_VALUE);
-        message = new OpenC2Message(ActionType.DENY, target);
+        message = new OpenC2Command(ActionType.DENY, target);
     }
 
     @Test
     void testJson() throws IOException {
-        message = new OpenC2Message(ActionType.DENY, target);
+        message = new OpenC2Command(ActionType.DENY, target);
 
 
         log.info("{}", message.toPrettyJson());
@@ -51,7 +51,7 @@ public class IpAddrTest {
 
     @Test
     void testIpAddr() throws IOException {
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(message.toJson());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
         IpAddr inTarget = (IpAddr) inMsg.getTarget();
         assertEquals(IP_VALUE, inTarget.getIpAddr());

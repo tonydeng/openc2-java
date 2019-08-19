@@ -3,7 +3,7 @@ package com.github.tonydeng.openc2.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.utilities.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Customized serializer to encode a OpenC2Message object into a JSON string
+ * Customized serializer to encode a OpenC2Command object into a JSON string
  *
  * @author Tony Deng
  * @version V1.0
  * @date 2019-08-18 12:00
  **/
 @Slf4j
-public class OpenC2MessageSerializer extends JsonSerializer<OpenC2Message> {
+public class OpenC2CommandSerializer extends JsonSerializer<OpenC2Command> {
     @Override
-    public void serialize(OpenC2Message message, JsonGenerator generator, SerializerProvider provider)
+    public void serialize(OpenC2Command message, JsonGenerator generator, SerializerProvider provider)
             throws IOException {
-        log.debug("openc2 message serializer start......");
+        log.debug("openc2 command serializer start......");
         generator.writeStartObject();
 
         if (message.hasHeader()) {
@@ -71,6 +71,6 @@ public class OpenC2MessageSerializer extends JsonSerializer<OpenC2Message> {
         }
         generator.writeEndObject();
 
-        log.debug("openc2 message serializer end......");
+        log.debug("openc2 command serializer end......");
     }
 }

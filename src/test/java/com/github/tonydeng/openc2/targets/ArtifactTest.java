@@ -2,7 +2,7 @@ package com.github.tonydeng.openc2.targets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 import org.junit.jupiter.api.Test;
@@ -43,14 +43,14 @@ public class ArtifactTest {
                 .setPayloadBin(PAYLOAD_VALUE)
                 .setUrl(URL_VALUE)
                 .setHashes(MAP_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.REPORT, target);
+        OpenC2Command message = new OpenC2Command(ActionType.REPORT, target);
 
         JsonNode expected = new ObjectMapper().readTree(expect);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
         assertEquals(expected, actual);
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
         assertTrue(inMsg.getTarget() instanceof Artifact);
         Artifact inTarget = (Artifact)inMsg.getTarget();
         assertEquals(MIME_VALUE, inTarget.getMime());

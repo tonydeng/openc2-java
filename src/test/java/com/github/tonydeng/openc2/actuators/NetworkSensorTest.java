@@ -2,7 +2,7 @@ package com.github.tonydeng.openc2.actuators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tonydeng.openc2.OpenC2Message;
+import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 import com.github.tonydeng.openc2.targets.IpAddr;
@@ -31,7 +31,7 @@ public class NetworkSensorTest {
     void test() throws IOException {
         IpAddr target = new IpAddr(IP_VALUE);
         NetworkSensor actuator = new NetworkSensor().setName(NAME_VALUE).setPath(PATH_VALUE);
-        OpenC2Message message = new OpenC2Message(ActionType.DENY, target).setActuator(actuator);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target).setActuator(actuator);
 
         log.info("{}", message.toPrettyJson());
 
@@ -40,7 +40,7 @@ public class NetworkSensorTest {
         assertEquals(expected, actual);
 
 
-        OpenC2Message inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
         assertTrue(inMsg.getActuator() instanceof NetworkSensor);
         NetworkSensor inActuator = (NetworkSensor) inMsg.getActuator();
         assertEquals(NAME_VALUE, inActuator.getName());
