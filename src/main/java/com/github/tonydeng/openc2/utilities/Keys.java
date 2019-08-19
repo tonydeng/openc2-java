@@ -10,6 +10,8 @@ package com.github.tonydeng.openc2.utilities;
  * @date 2019-08-17 23:21
  */
 public class Keys {
+    private Keys() {
+    }
 
     /**
      * Main message keys

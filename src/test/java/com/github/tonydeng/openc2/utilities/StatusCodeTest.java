@@ -1,9 +1,11 @@
 package com.github.tonydeng.openc2.utilities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Tony Deng
@@ -12,15 +14,15 @@ import org.junit.jupiter.api.Test;
  **/
 @Slf4j
 public class StatusCodeTest {
-  @Test
-  void test() {
-    assertEquals(200, StatusCode.OK.getValue());
-    assertEquals("200", StatusCode.OK.toString());
-  }
+    @Test
+    void test() {
+        assertEquals(200, StatusCode.OK.getValue());
+        assertEquals("200", StatusCode.OK.toString());
+    }
 
-  @Test
-  void testToJSON() {
-//    assertEquals("\""+StatusCode.OK.name()+"\"", JSON.toJSONString(StatusCode.OK));
-//    log.info("{}", JSON.toJSONString(StatusCode.OK, SerializerFeature.PrettyFormat));
-  }
+    @Test
+    void testToJSON() throws JsonProcessingException {
+        assertEquals("\"" + StatusCode.OK.name() + "\"", new ObjectMapper().writeValueAsString(StatusCode.OK));
+        log.info("{}", new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(StatusCode.OK));
+    }
 }

@@ -3,6 +3,11 @@ package com.github.tonydeng.openc2;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.tonydeng.openc2.json.JsonFormatter;
 
+/**
+ * OpenC2 Message
+ *
+ * @author tonydeng
+ */
 public interface OpenC2Message {
 
     /**
