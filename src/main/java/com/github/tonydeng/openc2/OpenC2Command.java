@@ -1,13 +1,11 @@
 package com.github.tonydeng.openc2;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.actuators.ActuatorType;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.OpenC2CommandDeserializer;
-import com.github.tonydeng.openc2.json.JsonFormatter;
 import com.github.tonydeng.openc2.json.OpenC2CommandSerializer;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
@@ -136,27 +134,5 @@ public class OpenC2Command implements OpenC2Message {
      */
     public boolean hasArgs() {
         return (args != null && args.size() > 0);
-    }
-
-    /**
-     * Convert the OpenC2Command object to a JSON string
-     *
-     * @return String containing the JSON representation of the object
-     * @throws JsonProcessingException Exception thrown by the Jackson library
-     */
-    public String toJson() throws JsonProcessingException {
-        return JsonFormatter.getJson(this, false);
-    }
-
-    /**
-     * Convert the OpenC2Command object to a JSON string that is more
-     * reader friendly.
-     *
-     * @return String containing the JSON representation of the object in human
-     * readable format
-     * @throws JsonProcessingException Exception thrown by the Jackson library
-     */
-    public String toPrettyJson() throws JsonProcessingException {
-        return JsonFormatter.getJson(this, true);
     }
 }

@@ -49,25 +49,8 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
                 case BODY:
                     deserializeBody(mapper.writeValueAsString(nodes.get(key)), message);
                     break;
-                case ID:
-                    message.setId(nodes.get(key).asText());
-                    break;
-                case ACTION:
-                    message.setAction(nodes.get(key).asText());
-                    break;
-                case TARGET:
-                    setTarget(nodes.get(key), message, mapper);
-                    break;
-                case ACTUATOR:
-                    setActuator(nodes.get(key), message, mapper);
-                    break;
-                case ARGUMENTS:
-                    JsonNode node = nodes.get(key);
-                    String argumentsJson = mapper.writeValueAsString(node);
-                    JsonParser argumentsParser = new JsonFactory().createParser(argumentsJson);
-                    message.setArgs(mapper.readValue(argumentsParser, Args.class));
-                    break;
                 default:
+                    deserializeOtherProperties(key, nodes, mapper, message);
                     break;
             }
 
@@ -76,6 +59,14 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
         return message;
     }
 
+    /**
+     * 反序列化Body
+     *
+     * @param json    Body JSON
+     * @param message OpenC2Command Message
+     * @return OpenC2Command
+     * @throws IOException
+     */
     private OpenC2Command deserializeBody(String json, OpenC2Command message) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -85,32 +76,45 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
 
         while (keys.hasNext()) {
             String key = keys.next();
-
-            switch (key) {
-                case ID:
-                    message.setId(nodes.get(key).asText());
-                    break;
-                case ACTION:
-                    message.setAction(nodes.get(key).asText());
-                    break;
-                case TARGET:
-                    setTarget(nodes.get(key), message, mapper);
-                    break;
-                case ACTUATOR:
-                    setActuator(nodes.get(key), message, mapper);
-                    break;
-                case ARGUMENTS:
-                    JsonNode node = nodes.get(key);
-                    String argumentsJson = mapper.writeValueAsString(node);
-                    JsonParser argumentsParser = new JsonFactory().createParser(argumentsJson);
-                    message.setArgs(mapper.readValue(argumentsParser, Args.class));
-                    break;
-                default:
-                    break;
-            }
+            deserializeOtherProperties(key, nodes, mapper, message);
         }
 
         return message;
+    }
+
+    /**
+     * 设置除了Header和Body的所有属性
+     *
+     * @param key  Properties Key
+     * @param nodes JsonNode
+     * @param mapper    Object Mapper
+     * @param message   OpenC2Command Message
+     * @throws IOException
+     */
+    private void deserializeOtherProperties(String key, JsonNode nodes, ObjectMapper mapper, OpenC2Command message)
+            throws IOException {
+        switch (key) {
+            case ID:
+                message.setId(nodes.get(key).asText());
+                break;
+            case ACTION:
+                message.setAction(nodes.get(key).asText());
+                break;
+            case TARGET:
+                setTarget(nodes.get(key), message, mapper);
+                break;
+            case ACTUATOR:
+                setActuator(nodes.get(key), message, mapper);
+                break;
+            case ARGUMENTS:
+                JsonNode node = nodes.get(key);
+                String argumentsJson = mapper.writeValueAsString(node);
+                JsonParser argumentsParser = new JsonFactory().createParser(argumentsJson);
+                message.setArgs(mapper.readValue(argumentsParser, Args.class));
+                break;
+            default:
+                break;
+        }
     }
 
     /**
