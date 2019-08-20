@@ -24,9 +24,9 @@
 - `OpenC2`执行器配置文件：指定在特定执行器功能的上下文中相关的`OpenC2`语言的子集。 网络防御组件，设备，系统和/或实例可能（实际上可能）实现多个执行器配置文件。 执行器配置文件通过定义将执行器标识为所需精度级别的说明符来扩展语言。 执行器配置文件可以定义与这些执行器功能相关和/或唯一的命令参数和目标。
 - `OpenC2`传输规范：利用现有协议和标准在特定环境中实现`OpenC2`。 这些标准用于超出语言范围的通信和安全功能，例如消息传输编码，身份验证和`OpenC2`消息的端到端传输。
 
-### OpenC2预言规范结构
+### OpenC2语言规范基本结构
 
-`OpenC2`语言规范定义了一种语言，用于组成用于命令和控制网络防御系统和组件的消息。 
+`OpenC2`语言规范定义了一种语言，用于组成用于命令和控制网络防御系统和组件的消息。
 
 消息由`Header`和`Payload`组成（在[OpenC2语言规范版本1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html)中定义为消息主体，并在一个或多个执行器配置文件中指定 ）。
 
@@ -37,7 +37,7 @@
 
 ## OpenC2协议分层
 
-`OpenC2`实现将上述相关的`OpenC2`规范与相关的行业规范，协议和标准集成在一起。 
+`OpenC2`实现将上述相关的`OpenC2`规范与相关的行业规范，协议和标准集成在一起。
 
 下图描述了`OpenC2`规范之间的关系，以及它们与其他行业标准和`OpenC2`的特定于环境的实现之间的关系。 
 
@@ -52,7 +52,7 @@
 | 协议层 | 例子 |
 |--|--|
 | Function-Specific Content | 执行器配置文件 <br/> ([[OpenC2-SLPF-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-slpf-v10)],...)|
-| Common Content | 	Language Specification |
+| Common Content | Language Specification |
 | Message | Transfer Specifications <br/> ([[OpenC2-HTTPS-v1.0](https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html#openc2-https-v10)], `OpenC2-over-CoAP`, ...) |
 | Secure Transport | `HTTPS`, `CoAP`, `MQTT`, `OpenDXL`, ... |
 
@@ -65,7 +65,6 @@
 ### Target模型
 
 ![Target模型](images/targets.png)
-
 
 ### Actuators模型
 
