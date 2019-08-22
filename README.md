@@ -23,17 +23,18 @@
     - [Target模型](#target%e6%a8%a1%e5%9e%8b)
     - [Actuators模型](#actuators%e6%a8%a1%e5%9e%8b)
     - [JSON序列化模型](#json%e5%ba%8f%e5%88%97%e5%8c%96%e6%a8%a1%e5%9e%8b)
+  - [实际类图](#%e5%ae%9e%e9%99%85%e7%b1%bb%e5%9b%be)
 
 ## OpenC2介绍
 
 ### 目标
 
-**`OpenC2`语言规范的目标是提供一种在网络防御系统的功能元素之间进行互操作的语言**。 该语言与`OpenC2`执行器配置文件和`OpenC2`传输规范结合使用，允许与供应商无关的网络攻击响应。
+**`OpenC2`语言规范的目标是提供一种在网络防御系统的`function elements`(功能元素)之间进行互操作的语言**。 该语言与`OpenC2`执行器配置文件和`OpenC2`传输规范结合使用，允许与供应商无关的网络攻击响应。
 
-综合自适应网络防御（`IACD`）框架基于传统的`OODA`（观察 - 定位 - 决定 - 行动）循环[IACD](https://translate.googleusercontent.com/translate_c?depth=1&rurl=translate.google.com&sl=auto&source=gtx_c&sp=nmt4&tl=zh-CN&u=https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html&xid=17259,15700002,15700023,15700186,15700191,15700256,15700259,15700262,15700265&usg=ALkJrhixiT6pLmGOLu_kVUC6CFZLiEwSFg#iacd)定义了一系列活动：
+综合自适应网络防御（`IACD`）框架基于传统的`OODA` (`Observe`(观察)–`Orient`(定位)–`Decide`(决定)–`Act`(行动))循环[IACD](https://translate.googleusercontent.com/translate_c?depth=1&rurl=translate.google.com&sl=auto&source=gtx_c&sp=nmt4&tl=zh-CN&u=https://docs.oasis-open.org/openc2/oc2ls/v1.0/cs01/oc2ls-v1.0-cs01.html&xid=17259,15700002,15700023,15700186,15700191,15700256,15700259,15700262,15700265&usg=ALkJrhixiT6pLmGOLu_kVUC6CFZLiEwSFg#iacd)定义了一系列活动：
 
 - `Sensing`(感知)：收集有关系统活动的数据
-- `Sense Making`(意图理解)：使用分析来评估数据，以了解正在发生的事情
+- `Sense Making`(意图理解)：对数据进行分析和评估，以了解正在发生的事情
 - `Decision Making`(决策)：确定响应系统事件的行动方案
 - `Acting`(行动)：执行行动过程
 
@@ -78,7 +79,7 @@
 
 `OpenC2`实现将上述相关的`OpenC2`规范与相关的行业规范，协议和标准集成在一起。
 
-下图描述了`OpenC2`规范之间的关系，以及它们与其他行业标准和`OpenC2`的特定于环境的实现之间的关系。 
+下图描述了`OpenC2`规范之间的关系，以及它们与其他行业标准和`OpenC2`的特定于环境的实现之间的关系。
 
 ![OpenC2协议分层](images/OpenC2协议分层.png)
 
@@ -104,16 +105,15 @@
 
 ### OpenC2 Command
 
-`Command`是由`Action`（要做什么），`Target`（正在执行的操作），可选的`Actuator`（执行命令的是什么）和`Command Arguments`这几部分组成，它们影响命令的执行方式。 
+`Command`是由`Action`（要做什么），`Target`（正在执行的操作），可选的`Actuator`（执行命令的是什么）和`Command Arguments`这几部分组成，它们影响命令的执行方式。
 
-`Target`(目标)与`Action`(动作)结合足以描述完整的`Command`。 
+`Target`(目标)与`Action`(动作)结合足以描述完整的`Command`。
 
 虽然`Actuator`和`Command Arguments`是可选的，但是可以为`Command`提供额外的精度。
 
 ### OpenC2 Response
 
-`Response`由数字格式的`StatusCode`(状态码)，以及可选的字符串格式的`status text`(状态文本)和可选`results`(结果)组成。 `result`s的格式取决于要返回的响应的数据类型。
-
+`Response`由数字格式的`StatusCode`(状态码)，以及可选的字符串格式的`status text`(状态文本)和可选`results`(结果)组成。 `results`的格式取决于要返回的响应的数据类型。
 
 ## OpenC2-Java模型
 
@@ -132,3 +132,7 @@
 ### JSON序列化模型
 
 ![JSON序列化模型](images/json.png)
+
+## 实际类图
+
+![实际类图](images/类图.png)
