@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.OpenC2Message;
 import com.github.tonydeng.openc2.OpenC2Response;
+import lombok.NonNull;
+import lombok.val;
 
 import java.io.IOException;
 
@@ -29,8 +31,9 @@ public class JsonFormatter {
      * @return String containing the JSON representation of the OpenC2Message object
      * @throws JsonProcessingException Exception thrown by the Jackson library
      */
-    public static String getJson(OpenC2Message message, boolean prettyPrint) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+    public static String getJson(@NonNull final OpenC2Message message, @NonNull final boolean prettyPrint)
+            throws JsonProcessingException {
+        val mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         if (prettyPrint) {
             return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(message);
@@ -46,7 +49,7 @@ public class JsonFormatter {
      * @return OpenC2Command object represented by the JSON string
      * @throws IOException Exception thrown by the Jackson library
      */
-    public static OpenC2Command readOpenC2Message(String json) throws IOException {
+    public static OpenC2Command readOpenC2Message(@NonNull String json) throws IOException {
         return (OpenC2Command) read(json, OpenC2Command.class);
     }
 
@@ -57,7 +60,7 @@ public class JsonFormatter {
      * @return OpenC2Response object
      * @throws IOException Exception thrown if there is a problem reading the JSON
      */
-    public static OpenC2Response readOpenC2Response(String json) throws IOException {
+    public static OpenC2Response readOpenC2Response(@NonNull String json) throws IOException {
         return (OpenC2Response) read(json, OpenC2Response.class);
     }
 
@@ -69,7 +72,7 @@ public class JsonFormatter {
      * @return object represented by the JSON string
      * @throws IOException Exception thrown if there is a problem reading the JSON
      */
-    public static Object read(String json, Class clazz) throws IOException {
+    private static Object read(@NonNull String json, @NonNull Class clazz) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(json, clazz);
     }
