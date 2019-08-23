@@ -31,7 +31,7 @@ public class OpenC2ResponseTest {
 
     @Test
     public void testCodeCoverage() throws Exception {
-        OpenC2Response response = OpenC2Response.builder()
+        val response = OpenC2Response.builder()
                 .status(OK.getValue())
                 .id("CommandResp")
                 .build();
