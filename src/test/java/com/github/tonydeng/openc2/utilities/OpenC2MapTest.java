@@ -1,13 +1,10 @@
 package com.github.tonydeng.openc2.utilities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Tony Deng
@@ -26,7 +23,7 @@ public class OpenC2MapTest {
 
   @Test
   void test() {
-    OpenC2Map<String> mapObject = new OpenC2Map<String>("String");  // Generic map
+    val mapObject = new OpenC2Map<String>("String");  // Generic map
 
     mapObject.put(MAP1_KEY, MAP1_VALUE)
         .put(MAP2_KEY, MAP2_VALUE)
@@ -34,7 +31,7 @@ public class OpenC2MapTest {
 
     assertEquals("String", mapObject.getObjectType());
     assertEquals(Keys.ARGUMENTS, mapObject.getSectionType());
-    Map<String, Object> map = mapObject.getAll();
+    val map = mapObject.getAll();
     assertEquals(MAP1_VALUE, map.get(MAP1_KEY));
     assertEquals(MAP2_VALUE, map.get(MAP2_KEY));
     assertEquals(MAP3_VALUE, map.get(MAP3_KEY));
@@ -48,8 +45,8 @@ public class OpenC2MapTest {
 
     assertNotNull(mapObject.hashCode());
 
-    OpenC2Map<String> mapObject2 = new OpenC2Map<String>("String");  // Generic map
-    OpenC2Map<String> mapObject3 = new OpenC2Map<String>("String");  // Generic map
+    val mapObject2 = new OpenC2Map<String>("String");  // Generic map
+    val mapObject3 = new OpenC2Map<String>("String");  // Generic map
 
     mapObject2.put(MAP1_KEY, MAP1_VALUE)
         .put(MAP2_KEY, MAP2_VALUE)

@@ -1,11 +1,12 @@
 package com.github.tonydeng.openc2.actuators;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.targets.IpAddr;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import lombok.var;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -28,13 +29,14 @@ public class EndpointTest {
 
     @Test
     void test() throws IOException {
-        IpAddr target = new IpAddr(IP_VALUE);
-        Endpoint actuator = new Endpoint(ENDPOINT_VALUE);
-        OpenC2Command message = new OpenC2Command(ActionType.DENY, target).setActuator(actuator);
+        val target = new IpAddr(IP_VALUE);
+        val actuator = new Endpoint(ENDPOINT_VALUE);
+        var message = new OpenC2Command(ActionType.DENY, target);
+        message.setActuator(actuator);
         log.info("{}", message.toJson());
 
-        JsonNode expected = new ObjectMapper().readTree(expect);
-        JsonNode actual = new ObjectMapper().readTree(message.toJson());
+        val expected = new ObjectMapper().readTree(expect);
+        val actual = new ObjectMapper().readTree(message.toJson());
 
         assertEquals(expected, actual);
     }

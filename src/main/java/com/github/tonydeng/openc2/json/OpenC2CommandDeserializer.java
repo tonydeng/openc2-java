@@ -85,10 +85,10 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
     /**
      * 设置除了Header和Body的所有属性
      *
-     * @param key  Properties Key
-     * @param nodes JsonNode
-     * @param mapper    Object Mapper
-     * @param message   OpenC2Command Message
+     * @param key     Properties Key
+     * @param nodes   JsonNode
+     * @param mapper  Object Mapper
+     * @param message OpenC2Command Message
      * @throws IOException
      */
     private void deserializeOtherProperties(String key, JsonNode nodes, ObjectMapper mapper, OpenC2Command message)

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.tonydeng.openc2.actuators.ActuatorType;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.google.common.collect.Maps;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
@@ -15,11 +16,11 @@ import java.util.Map;
  * @version V1.0
  * @date 2019-08-17 23:24
  **/
+@NoArgsConstructor
 public class OpenC2Map<T> {
-
-    protected String sectionType;
-    protected String objectType;
-    Map<String, Object> map;
+    private String sectionType;
+    private String objectType;
+    private Map<String, Object> map;
 
     /**
      * Constructor for creating a OpenC2Map object for a given type
