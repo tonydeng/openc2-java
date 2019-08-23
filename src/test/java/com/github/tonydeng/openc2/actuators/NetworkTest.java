@@ -29,7 +29,8 @@ public class NetworkTest {
     void test() throws IOException {
         IpAddr target = new IpAddr(IP_VALUE);
         Network actuator = new Network(NETWORK_VALUE);
-        OpenC2Command message = new OpenC2Command(ActionType.DENY, target).setActuator(actuator);
+        OpenC2Command message = new OpenC2Command(ActionType.DENY, target);
+        message.setActuator(actuator);
 
         JsonNode expected = new ObjectMapper().readTree(expect);
         JsonNode actual = new ObjectMapper().readTree(message.toJson());

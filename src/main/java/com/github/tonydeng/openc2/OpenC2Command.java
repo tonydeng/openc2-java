@@ -9,7 +9,7 @@ import com.github.tonydeng.openc2.json.OpenC2CommandDeserializer;
 import com.github.tonydeng.openc2.json.OpenC2CommandSerializer;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
-import lombok.Getter;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -20,33 +20,22 @@ import org.apache.commons.lang3.StringUtils;
  * @author dengtao
  **/
 @Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 @JsonSerialize(using = OpenC2CommandSerializer.class)
 @JsonDeserialize(using = OpenC2CommandDeserializer.class)
 public class OpenC2Command implements OpenC2Message {
-
     private String id;
     private Header header;
+    @NonNull
     private ActionType action;
+    @NonNull
     private OpenC2Map<TargetType> target;
     private OpenC2Map<ActuatorType> actuator;
     private OpenC2Map<String> args;
-
-    /**
-     * This constructor on exists for Jackson processing and should not be use directly.
-     */
-    public OpenC2Command() {
-    }
-
-    /**
-     * Constructor to assign an action and target to the message
-     *
-     * @param action ActionType that describes the OpenC2 message
-     * @param target Target object for the message
-     */
-    public OpenC2Command(ActionType action, OpenC2Map<TargetType> target) {
-        this.action = action;
-        this.target = target;
-    }
 
     /**
      * Constructor to assign the id, action and target to the message
@@ -63,41 +52,19 @@ public class OpenC2Command implements OpenC2Message {
     /**
      * Get Action Type Value, Not Type Name
      *
-     * @return
+     * @return Action Type value
      */
     public String getAction() {
         return action.toString();
     }
 
-
-    public OpenC2Command setHeader(Header header) {
-        this.header = header;
-        return this;
-    }
-
-    public OpenC2Command setId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public OpenC2Command setAction(String action) {
+    /**
+     * Set Action Type Value, Not Type Name
+     *
+     * @param action
+     */
+    public void setAction(String action) {
         this.action = ActionType.valueOf(action.toUpperCase());
-        return this;
-    }
-
-    public OpenC2Command setTarget(OpenC2Map<TargetType> target) {
-        this.target = target;
-        return this;
-    }
-
-    public OpenC2Command setActuator(OpenC2Map<ActuatorType> actuator) {
-        this.actuator = actuator;
-        return this;
-    }
-
-    public OpenC2Command setArgs(OpenC2Map<String> args) {
-        this.args = args;
-        return this;
     }
 
     /**

@@ -33,9 +33,9 @@ public class JsonFormatterTest {
 
     @BeforeAll
     static void init() throws JsonProcessingException {
-        command = new OpenC2Command("", ActionType.COPY, new IpAddr(IP_VAULE))
-                .setActuator(new NetworkSensor())
-                .setArgs(new Args());
+        command = OpenC2Command.builder().action(ActionType.COPY).target(new IpAddr(IP_VAULE))
+                .actuator(new NetworkSensor()).args(new Args())
+                .build();
         commandJson = JsonFormatter.getJson(command, false);
 
         response = new OpenC2Response();
