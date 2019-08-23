@@ -2,6 +2,8 @@ package com.github.tonydeng.openc2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.tonydeng.openc2.json.JsonFormatter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * OpenC2 Message
@@ -17,7 +19,8 @@ public interface OpenC2Message {
      * @throws JsonProcessingException Exception thrown by the Jackson library
      */
     default String toJson() throws JsonProcessingException {
-        return JsonFormatter.getJson(this, false);
+//        return JsonFormatter.getJson(this, false);
+        return new Gson().toJson(this);
     }
 
     /**
@@ -28,6 +31,7 @@ public interface OpenC2Message {
      * @throws JsonProcessingException Exception thrown by the Jackson library
      */
     default String toPrettyJson() throws JsonProcessingException {
-        return JsonFormatter.getJson(this, true);
+//        return JsonFormatter.getJson(this, true);
+        return new GsonBuilder().setPrettyPrinting().create().toJson(this);
     }
 }

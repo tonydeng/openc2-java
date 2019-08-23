@@ -1,8 +1,10 @@
 package com.github.tonydeng.openc2;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.JsonFormatter;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -40,6 +42,18 @@ public class OpenC2ResponseTest {
         assertEquals(BAD_REQUEST.getValue(), response.getStatus());
 
         log.info("{}", response.toPrettyJson());
+    }
+
+    @Test
+    void testGson() throws JsonProcessingException {
+        val response = OpenC2Response.builder().status(OK.getValue())
+                .id(RESP_ID).idRef("complete")
+                .build();
+        val response2 = new Gson().fromJson(response.toJson(), OpenC2Response.class);
+        val response3 = new Gson().fromJson(expected1, OpenC2Response.class);
+        assertEquals(response.toJson(), response2.toJson());
+        assertEquals(response.toJson(), response3.toJson());
+        assertEquals(response2.toJson(), response3.toJson());
     }
 
     @Test

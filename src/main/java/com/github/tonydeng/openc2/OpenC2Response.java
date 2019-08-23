@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.OpenC2ResponseDeserializer;
 import com.github.tonydeng.openc2.json.OpenC2ResponseSerializer;
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 /**
@@ -19,11 +20,12 @@ import lombok.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonSerialize(using = OpenC2ResponseSerializer.class)
-@JsonDeserialize(using = OpenC2ResponseDeserializer.class)
+//@JsonSerialize(using = OpenC2ResponseSerializer.class)
+//@JsonDeserialize(using = OpenC2ResponseDeserializer.class)
 public class OpenC2Response implements OpenC2Message {
     private Header header;
     private String id;
+    @SerializedName("id_ref")
     private String idRef;
     @NonNull
     private int status;

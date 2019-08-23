@@ -25,8 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonSerialize(using = OpenC2CommandSerializer.class)
-@JsonDeserialize(using = OpenC2CommandDeserializer.class)
+//@JsonSerialize(using = OpenC2CommandSerializer.class)
+//@JsonDeserialize(using = OpenC2CommandDeserializer.class)
 public class OpenC2Command implements OpenC2Message {
     private String id;
     private Header header;
