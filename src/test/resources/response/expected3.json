@@ -1,0 +1,14 @@
+{
+  "header": {
+    "version": "0.1.0",
+    "id": "TEST-id-1",
+    "content_type": "context"
+  },
+  "response": {
+    "id": "CommandResp",
+    "id_ref": "complete",
+    "status": 200,
+    "status_text": "Successful",
+    "results": "These are the results"
+  }
+}

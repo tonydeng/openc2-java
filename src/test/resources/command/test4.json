@@ -1,0 +1,11 @@
+{
+  "id": "TEST-id-1",
+  "action": "copy",
+  "target": {
+    "ip_addr": "1.2.3.4"
+  },
+  "args": {
+    "start_time": "now",
+    "response_requested": "Ack"
+  }
+}

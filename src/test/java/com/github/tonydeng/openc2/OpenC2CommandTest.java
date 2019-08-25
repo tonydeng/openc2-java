@@ -1,6 +1,5 @@
 package com.github.tonydeng.openc2;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.action.ActionType;
 import com.github.tonydeng.openc2.actuators.ActuatorType;
@@ -12,9 +11,14 @@ import com.github.tonydeng.openc2.json.JsonFormatter;
 import com.github.tonydeng.openc2.targets.IpAddr;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.github.tonydeng.openc2.utilities.StatusCode;
+import com.github.tonydeng.openc2.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import lombok.var;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,15 +37,28 @@ public class OpenC2CommandTest {
     private static final String CONTENT_VALUE = "context";
     private static final String VERSION_VALUE = "0.1.0";
 
-    private static final String test1Json = "{\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"}}";
-    private static final String test2Json = "{\"id\":\"TEST-id-1\",\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"}}";
-    private static final String test3Json = "{\"id\":\"TEST-id-1\",\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"},\"actuator\":{\"endpoint\":{\"actuator_id\":\"router\"}}}";
-    private static final String test4Json = "{\"id\":\"TEST-id-1\",\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"},\"args\":{\"start_time\":\"now\",\"response_requested\":\"Ack\"}}";
-    private static final String test5Json = "{\"header\":{\"version\":\"0.1.0\",\"id\":\"TEST-id-1\",\"content_type\":\"context\"},\"command\":{\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"}}}";
-    private static final String test6Json = "{\"header\":{\"version\":\"0.1.0\",\"id\":\"TEST-id-1\",\"content_type\":\"context\"},\"command\":{\"action\":\"copy\",\"target\":{\"ip_addr\":\"1.2.3.4\"},\"args\":{\"start_time\":\"now\",\"response_requested\":\"Ack\"},\"actuator\":{\"endpoint\":{\"actuator_id\":\"router\"}}}}";
-    private static final String test7Json = "{\"action\":\"copy\",\"target\":{\"artifact\":{\"mime_type\":\"Test mime\",\"payload_bin\":[10,15,20],\"url\":\"test url\",\"hashes\":{\"hashkey2\":\"value2\",\"hashkey1\":\"value1\"}}},\"actuator\":{\"network_sensor\":{\"name\":\"cisco\",\"path\":\"www.router.com\"}}}";
-    private static final String test8Json = "{\"header\":{\"version\":\"0.1.0\",\"id\":\"TEST-id-1\",\"content_type\":\"context\"},\"command\":{\"id\":\"TEST-id-1\",\"action\":\"copy\",\"target\":{\"artifact\":{\"mime_type\":\"Test mime\",\"payload_bin\":[10,15,20],\"url\":\"test url\",\"hashes\":{\"hashkey2\":\"value2\",\"hashkey1\":\"value1\"}}},\"actuator\":{\"network_sensor\":{\"name\":\"cisco\",\"path\":\"www.router.com\"}}}}";
+    private static String test1Json;
+    private static String test2Json;
+    private static String test3Json;
+    private static String test4Json;
+    private static String test5Json;
+    private static String test6Json;
+    private static String test7Json;
+    private static String test8Json;
 
+
+    @BeforeAll
+    static void setUp() throws IOException {
+        test1Json = FileUtils.readResourcesFile("command/test1.json");
+        test2Json = FileUtils.readResourcesFile("command/test2.json");
+        test3Json = FileUtils.readResourcesFile("command/test3.json");
+        test4Json = FileUtils.readResourcesFile("command/test4.json");
+        test5Json = FileUtils.readResourcesFile("command/test5.json");
+        test6Json = FileUtils.readResourcesFile("command/test6.json");
+        test7Json = FileUtils.readResourcesFile("command/test7.json");
+        test8Json = FileUtils.readResourcesFile("command/test8.json");
+//
+    }
 
     @Test
     void testHeader() {
@@ -227,7 +244,7 @@ public class OpenC2CommandTest {
 
     @Test
     void testTest6() throws Exception {
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(test6Json);
+        var inMsg = JsonFormatter.readOpenC2Message(test6Json);
 
         assertTrue(inMsg.hasHeader());
         assertEquals(VERSION_VALUE, inMsg.getHeader().getVersion());
@@ -249,7 +266,9 @@ public class OpenC2CommandTest {
         // Test to read target and actuators that are objects
         // Just reading the JSON string is success
         inMsg = JsonFormatter.readOpenC2Message(test7Json);
+        assertNotNull(inMsg);
         inMsg = JsonFormatter.readOpenC2Message(test8Json);
+        assertNotNull(inMsg);
     }
 
 }

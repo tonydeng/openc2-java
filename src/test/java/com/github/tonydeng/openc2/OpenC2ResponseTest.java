@@ -3,9 +3,13 @@ package com.github.tonydeng.openc2;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.JsonFormatter;
+import com.github.tonydeng.openc2.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static com.github.tonydeng.openc2.utilities.StatusCode.BAD_REQUEST;
 import static com.github.tonydeng.openc2.utilities.StatusCode.OK;
@@ -24,13 +28,19 @@ public class OpenC2ResponseTest {
     private static final String RESULTS_VALUE = "These are the results";
     private static final String RESP_ID = "CommandResp";
 
+    private static String expected1;
+    private static String expected2;
+    private static String expected3;
 
-    private static String expected1 = "{\"id\":\"CommandResp\",\"id_ref\":\"complete\",\"status\":200}";
-    private static String expected2 = "{\"id\":\"CommandResp\",\"id_ref\":\"complete\",\"status\":200,\"status_text\":\"Successful\",\"results\":\"These are the results\"}";
-    private static String expected3 = "{\"header\":{\"version\":\"0.1.0\",\"id\":\"TEST-id-1\",\"content_type\":\"context\"},\"response\":{\"id\":\"CommandResp\",\"id_ref\":\"complete\",\"status\":200,\"status_text\":\"Successful\",\"results\":\"These are the results\"}}}";
+    @BeforeAll
+    static void setUp() throws IOException {
+        expected1 = FileUtils.readResourcesFile("response/expected1.json");
+        expected2 = FileUtils.readResourcesFile("response/expected2.json");
+        expected3 = FileUtils.readResourcesFile("response/expected3.json");
+    }
 
     @Test
-    public void testCodeCoverage() throws Exception {
+    void testCodeCoverage() throws Exception {
         val response = OpenC2Response.builder()
                 .status(OK.getValue())
                 .id("CommandResp")
@@ -43,7 +53,7 @@ public class OpenC2ResponseTest {
     }
 
     @Test
-    public void test1() throws Exception {
+    void test1() throws Exception {
 
         val response = OpenC2Response.builder().status(OK.getValue())
                 .id(RESP_ID).idRef("complete")
@@ -62,7 +72,7 @@ public class OpenC2ResponseTest {
     }
 
     @Test
-    public void test2() throws Exception {
+    void test2() throws Exception {
 
         val response = OpenC2Response.builder().status(OK.getValue()).statusText("Successful")
                 .id(RESP_ID).idRef("complete")
@@ -81,7 +91,7 @@ public class OpenC2ResponseTest {
     }
 
     @Test
-    public void test3() throws Exception {
+    void test3() throws Exception {
 
         OpenC2Response response = OpenC2Response.builder().status(OK.getValue())
                 .id(RESP_ID).idRef("complete").statusText(STATUS_TEXT_VALUE)
