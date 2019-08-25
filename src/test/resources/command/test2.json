@@ -2,6 +2,6 @@
   "id":"TEST-id-1",
   "action":"copy",
   "target":{
-    "ip_addr":"1.2.3.4",
+    "ip_addr":"1.2.3.4"
   }
 }
