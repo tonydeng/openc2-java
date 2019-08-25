@@ -1,0 +1,32 @@
+{
+  "header": {
+    "version": "0.1.0",
+    "id": "TEST-id-1",
+    "content_type": "context"
+  },
+  "command": {
+    "id": "TEST-id-1",
+    "action": "copy",
+    "target": {
+      "artifact": {
+        "mime_type": "Test mime",
+        "payload_bin": [
+          10,
+          15,
+          20
+        ],
+        "url": "test url",
+        "hashes": {
+          "hashkey2": "value2",
+          "hashkey1": "value1"
+        }
+      }
+    },
+    "actuator": {
+      "network_sensor": {
+        "name": "cisco",
+        "path": "www.router.com"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "action": "copy",
+  "target": {
+    "artifact": {
+      "mime_type": "Test mime",
+      "payload_bin": [
+        10,
+        15,
+        20
+      ],
+      "url": "test url",
+      "hashes": {
+        "hashkey2": "value2",
+        "hashkey1": "value1"
+      }
+    }
+  },
+  "actuator": {
+    "network_sensor": {
+      "name": "cisco",
+      "path": "www.router.com"
+    }
+  }
+}
