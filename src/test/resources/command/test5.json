@@ -1,0 +1,13 @@
+{
+  "header": {
+    "version": "0.1.0",
+    "id": "TEST-id-1",
+    "content_type": "context"
+  },
+  "command": {
+    "action": "copy",
+    "target": {
+      "ip_addr": "1.2.3.4"
+    }
+  }
+}
