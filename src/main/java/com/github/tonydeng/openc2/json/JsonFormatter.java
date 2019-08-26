@@ -49,7 +49,7 @@ public class JsonFormatter {
      * @return OpenC2Command object represented by the JSON string
      * @throws IOException Exception thrown by the Jackson library
      */
-    public static OpenC2Command readOpenC2Message(@NonNull String json) throws IOException {
+    public static OpenC2Command readOpenC2Command(@NonNull String json) throws IOException {
         return (OpenC2Command) read(json, OpenC2Command.class);
     }
 

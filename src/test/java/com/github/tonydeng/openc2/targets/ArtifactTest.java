@@ -50,7 +50,7 @@ public class ArtifactTest {
         assertEquals(expected, actual);
 
 
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect);
         assertTrue(inMsg.getTarget() instanceof Artifact);
         Artifact inTarget = (Artifact)inMsg.getTarget();
         assertEquals(MIME_VALUE, inTarget.getMime());

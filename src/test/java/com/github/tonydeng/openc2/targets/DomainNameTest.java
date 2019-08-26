@@ -35,7 +35,7 @@ public class DomainNameTest {
 
         assertEquals(expected, actual);
 
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect);
         assertTrue(inMsg.getTarget() instanceof DomainName);
         DomainName inTarget = (DomainName) inMsg.getTarget();
         assertEquals(DOMAIN_VALUE, inTarget.getDomainName());

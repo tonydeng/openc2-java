@@ -1,6 +1,5 @@
 package com.github.tonydeng.openc2.actuators;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.action.ActionType;
@@ -43,7 +42,7 @@ public class NetworkSensorTest {
         assertEquals(expected, actual);
 
 
-        val inMsg = JsonFormatter.readOpenC2Message(expect);
+        val inMsg = JsonFormatter.readOpenC2Command(expect);
         assertTrue(inMsg.getActuator() instanceof NetworkSensor);
         val inActuator = (NetworkSensor) inMsg.getActuator();
         assertEquals(NAME_VALUE, inActuator.getName());

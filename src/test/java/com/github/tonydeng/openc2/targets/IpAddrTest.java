@@ -51,7 +51,7 @@ public class IpAddrTest {
 
     @Test
     void testIpAddr() throws IOException {
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(message.toJson());
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(message.toJson());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
         IpAddr inTarget = (IpAddr) inMsg.getTarget();
         assertEquals(IP_VALUE, inTarget.getIpAddr());
