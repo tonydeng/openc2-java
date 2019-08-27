@@ -6,6 +6,9 @@ import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.json.OpenC2ResponseDeserializer;
 import com.github.tonydeng.openc2.json.OpenC2ResponseSerializer;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 /**
  * OpenC2Response is to process the message that is returned to a
@@ -37,7 +40,7 @@ public class OpenC2Response implements OpenC2Message {
      * @return true if the id value has been set
      */
     public boolean hasHeader() {
-        return (header != null && !header.isEmpty());
+        return (null != header && !header.isEmpty());
     }
 
     /**
@@ -46,7 +49,7 @@ public class OpenC2Response implements OpenC2Message {
      * @return true if the id value has been set
      */
     public boolean hasStatusText() {
-        return (statusText != null && !statusText.isEmpty());
+        return StringUtils.isNotEmpty(statusText);
     }
 
     /**
@@ -55,6 +58,6 @@ public class OpenC2Response implements OpenC2Message {
      * @return true if the actuator object has been set
      */
     public boolean hasResults() {
-        return (results != null);
+        return Objects.nonNull(results);
     }
 }

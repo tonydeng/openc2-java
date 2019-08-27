@@ -8,9 +8,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tonydeng.openc2.OpenC2Response;
 import com.github.tonydeng.openc2.header.Header;
+import com.google.common.base.Stopwatch;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.tonydeng.openc2.utilities.Keys.*;
 
@@ -19,23 +22,25 @@ import static com.github.tonydeng.openc2.utilities.Keys.*;
  *
  * @author dengtao
  **/
+@Slf4j
 public class OpenC2ResponseDeserializer extends JsonDeserializer<OpenC2Response> {
     @Override
     public OpenC2Response deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+        val watch = Stopwatch.createStarted();
 
-        OpenC2Response response = new OpenC2Response();
+        val response = new OpenC2Response();
 
-        ObjectMapper mapper = new ObjectMapper();
+        val mapper = new ObjectMapper();
 
         JsonNode nodes = parser.getCodec().readTree(parser);
-        Iterator<String> keys = nodes.fieldNames();
+        val keys = nodes.fieldNames();
 
         while (keys.hasNext()) {
-            String key = keys.next();
+            val key = keys.next();
 
             switch (key) {
                 case HEADER:
-                    String headerJson = mapper.writeValueAsString(nodes.get(key));
+                    val headerJson = mapper.writeValueAsString(nodes.get(key));
                     response.setHeader(
                             mapper.readValue(
                                     new JsonFactory().createParser(headerJson),
@@ -51,6 +56,8 @@ public class OpenC2ResponseDeserializer extends JsonDeserializer<OpenC2Response>
                     break;
             }
         }
+        watch.stop();
+        log.debug("openc2 response deserializer {} microseconds ......", watch.elapsed(TimeUnit.MICROSECONDS));
         return response;
     }
 
@@ -62,7 +69,7 @@ public class OpenC2ResponseDeserializer extends JsonDeserializer<OpenC2Response>
      */
     private void deserializeBody(JsonNode nodes, OpenC2Response response) {
 
-        Iterator<String> keys = nodes.fieldNames();
+        val keys = nodes.fieldNames();
         while (keys.hasNext()) {
             String key = keys.next();
             deserializeIdAndStatus(key, nodes, response);

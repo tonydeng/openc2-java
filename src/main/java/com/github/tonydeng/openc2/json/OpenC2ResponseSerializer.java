@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.github.tonydeng.openc2.OpenC2Response;
 import com.github.tonydeng.openc2.utilities.Keys;
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Customized Serializer for OpenC2 response messages
@@ -19,7 +22,8 @@ public class OpenC2ResponseSerializer extends JsonSerializer<OpenC2Response> {
     @Override
     public void serialize(OpenC2Response response, JsonGenerator generator, SerializerProvider provider)
             throws IOException {
-        log.debug("openc2 response serializer start......");
+        val watch = Stopwatch.createStarted();
+
         generator.writeStartObject();
 
         if (response.hasHeader()) {
@@ -45,6 +49,9 @@ public class OpenC2ResponseSerializer extends JsonSerializer<OpenC2Response> {
         }
 
         generator.writeEndObject();
-        log.debug("openc2 response serializer end......");
+
+        watch.stop();
+
+        log.debug("openc2 response serializer {} microseconds ......", watch.elapsed(TimeUnit.MICROSECONDS));
     }
 }

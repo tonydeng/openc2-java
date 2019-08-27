@@ -12,12 +12,14 @@ import com.github.tonydeng.openc2.args.Args;
 import com.github.tonydeng.openc2.header.Header;
 import com.github.tonydeng.openc2.targets.TargetType;
 import com.github.tonydeng.openc2.utilities.OpenC2Map;
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.WordUtils;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.tonydeng.openc2.utilities.Keys.*;
 
@@ -30,20 +32,21 @@ import static com.github.tonydeng.openc2.utilities.Keys.*;
 public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
     @Override
     public OpenC2Command deserialize(JsonParser parser, DeserializationContext context) throws IOException {
-        log.debug("openc2 command deserialize start......");
-        OpenC2Command message = new OpenC2Command();
-        ObjectMapper mapper = new ObjectMapper();
+        val watch = Stopwatch.createStarted();
+
+        val message = new OpenC2Command();
+        val mapper = new ObjectMapper();
 
         JsonNode nodes = parser.getCodec().readTree(parser);
 
-        Iterator<String> keys = nodes.fieldNames();
+        val keys = nodes.fieldNames();
 
         while (keys.hasNext()) {
-            String key = keys.next();
+            val key = keys.next();
             switch (key) {
                 case HEADER:
-                    String headerJson = mapper.writeValueAsString(nodes.get(key));
-                    JsonParser p = new JsonFactory().createParser(headerJson);
+                    val headerJson = mapper.writeValueAsString(nodes.get(key));
+                    val p = new JsonFactory().createParser(headerJson);
                     message.setHeader(mapper.readValue(p, Header.class));
                     break;
                 case BODY:
@@ -53,9 +56,9 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
                     deserializeOtherProperties(key, nodes, mapper, message);
                     break;
             }
-
         }
-        log.debug("openc2 command deserialize end......");
+        watch.stop();
+        log.debug("openc2 command deserializer {} microseconds ......", watch.elapsed(TimeUnit.MICROSECONDS));
         return message;
     }
 
@@ -68,14 +71,14 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
      * @throws IOException
      */
     private OpenC2Command deserializeBody(String json, OpenC2Command message) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
+        val mapper = new ObjectMapper();
 
         JsonNode nodes = mapper.readTree(json);
 
-        Iterator<String> keys = nodes.fieldNames();
+        val keys = nodes.fieldNames();
 
         while (keys.hasNext()) {
-            String key = keys.next();
+            val key = keys.next();
             deserializeOtherProperties(key, nodes, mapper, message);
         }
 
@@ -107,9 +110,9 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
                 setActuator(nodes.get(key), message, mapper);
                 break;
             case ARGUMENTS:
-                JsonNode node = nodes.get(key);
-                String argumentsJson = mapper.writeValueAsString(node);
-                JsonParser argumentsParser = new JsonFactory().createParser(argumentsJson);
+                val node = nodes.get(key);
+                val argumentsJson = mapper.writeValueAsString(node);
+                val argumentsParser = new JsonFactory().createParser(argumentsJson);
                 message.setArgs(mapper.readValue(argumentsParser, Args.class));
                 break;
             default:
@@ -127,8 +130,8 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
      */
     private void setActuator(JsonNode actuatorNode, OpenC2Command message, ObjectMapper mapper) throws IOException {
 
-        String actuatorName = actuatorNode.fieldNames().next();
-        final JsonParser actuatorParser = getJsonParser(actuatorNode, actuatorName, mapper);
+        val actuatorName = actuatorNode.fieldNames().next();
+        val actuatorParser = getJsonParser(actuatorNode, actuatorName, mapper);
 
         try {
             Class<?> clazz = Class.forName(getActuatorClassName(actuatorName));
@@ -148,9 +151,9 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
      */
     private void setTarget(JsonNode targetNode, OpenC2Command message, ObjectMapper mapper) throws IOException {
 
-        String targetName = targetNode.fieldNames().next();
+        val targetName = targetNode.fieldNames().next();
 
-        final JsonParser targetParser = getJsonParser(targetNode, targetName, mapper);
+        val targetParser = getJsonParser(targetNode, targetName, mapper);
 
         try {
             Class<?> clazz = Class.forName(getTargetClassName(targetName));
@@ -194,7 +197,6 @@ public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {
     private String getTargetClassName(String name) {
         return "com.github.tonydeng.openc2.targets." + getCamelCase(name);
     }
-
 
     private String getActuatorClassName(String name) {
         return "com.github.tonydeng.openc2.actuators." + getCamelCase(name);

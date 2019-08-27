@@ -73,7 +73,7 @@ public class OpenC2Command implements OpenC2Message {
      * @return true if the id value has been set
      */
     public boolean hasHeader() {
-        return (header != null && !header.isEmpty());
+        return (null != header && !header.isEmpty());
     }
 
     /**
@@ -91,7 +91,7 @@ public class OpenC2Command implements OpenC2Message {
      * @return true if the actuator object has been set
      */
     public boolean hasActuator() {
-        return (actuator != null && actuator.size() > 0);
+        return (null != actuator && actuator.size() > 0);
     }
 
     /**
@@ -100,6 +100,6 @@ public class OpenC2Command implements OpenC2Message {
      * @return true if the args object has been set
      */
     public boolean hasArgs() {
-        return (args != null && args.size() > 0);
+        return (null != args && args.size() > 0);
     }
 }

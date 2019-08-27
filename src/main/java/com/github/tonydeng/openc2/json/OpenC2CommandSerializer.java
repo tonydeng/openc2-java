@@ -5,10 +5,13 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.github.tonydeng.openc2.OpenC2Command;
 import com.github.tonydeng.openc2.utilities.Keys;
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Customized serializer to encode a OpenC2Command object into a JSON string
@@ -22,7 +25,8 @@ public class OpenC2CommandSerializer extends JsonSerializer<OpenC2Command> {
     @Override
     public void serialize(OpenC2Command message, JsonGenerator generator, SerializerProvider provider)
             throws IOException {
-        log.debug("openc2 command serializer start......");
+        val watch = Stopwatch.createStarted();
+
         generator.writeStartObject();
 
         if (message.hasHeader()) {
@@ -71,6 +75,8 @@ public class OpenC2CommandSerializer extends JsonSerializer<OpenC2Command> {
         }
         generator.writeEndObject();
 
-        log.debug("openc2 command serializer end......");
+        watch.stop();
+
+        log.debug("openc2 command serializer {} microseconds ......", watch.elapsed(TimeUnit.MICROSECONDS));
     }
 }
