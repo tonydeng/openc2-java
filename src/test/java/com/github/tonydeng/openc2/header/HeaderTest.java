@@ -3,10 +3,10 @@ package com.github.tonydeng.openc2.header;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import lombok.var;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author dengtao
@@ -22,12 +22,18 @@ public class HeaderTest {
     static final String CONTENT = "content";
     static final String CONTENT2 = "content2";
 
-    @Test
-    void testEquals() {
-        val header = Header.builder()
+    static Header header;
+
+    @BeforeAll
+    static void setUp() {
+        header = Header.builder()
                 .commandId(ID).version(VERSION)
                 .contentType(CONTENT).created(CREATED)
                 .sender(SENDER).build();
+    }
+
+    @Test
+    void testValueEquals() {
 
         assertEquals(VERSION, header.getVersion());
         assertEquals(ID, header.getCommandId());
@@ -58,4 +64,23 @@ public class HeaderTest {
         assertTrue(header.isEmpty());
     }
 
+    @Test
+    void testEquals() {
+        val header2 = new Header(ID, VERSION, CONTENT, CREATED, SENDER);
+
+        assertTrue(header.equals(header2));
+
+        header2.setCommandId("abc");
+        header2.setContentType(CONTENT2);
+        header2.setVersion(VERSION2);
+
+        assertFalse(header.equals(header2));
+    }
+
+    @Test
+    void testHashCode() {
+        val header2 = new Header();
+        assertNotNull(header2.hashCode());
+        log.info("{}", header2.hashCode());
+    }
 }

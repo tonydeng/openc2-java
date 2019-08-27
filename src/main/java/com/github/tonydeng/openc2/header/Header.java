@@ -16,15 +16,18 @@ import org.apache.commons.lang3.StringUtils;
 @Builder
 @EqualsAndHashCode
 public class Header {
-
+    /**
+     * The Message Command ID
+     */
+    private String commandId;
     /**
      * Message Protocol version
      */
     private String version;
     /**
-     * The Message Command ID
+     * The type and version of the message body
      */
-    private String commandId;
+    private String contentType;
     /**
      * Creation date/time of the content
      */
@@ -33,10 +36,6 @@ public class Header {
      * The Message Sender
      */
     private String sender;
-    /**
-     * The type and version of the message body
-     */
-    private String contentType;
 
 
     @JsonSetter("id")
