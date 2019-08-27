@@ -37,7 +37,7 @@ public class NetworkTest {
         assertEquals(expected, actual);
 
 
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect);
         assertTrue(inMsg.getActuator() instanceof Network);
         Network inActuator = (Network) inMsg.getActuator();
         assertEquals(NETWORK_VALUE, inActuator.getNetwork());

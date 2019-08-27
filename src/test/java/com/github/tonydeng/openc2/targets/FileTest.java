@@ -54,7 +54,7 @@ public class FileTest {
 
     @Test
     void testGetName() throws IOException {
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File) inMsg.getTarget();
 
@@ -71,7 +71,7 @@ public class FileTest {
         assertEquals(expected, actual);
 
 
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect3);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect3);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File) inMsg.getTarget();
         assertEquals(MAP_VALUE, inTarget.getHashes());
@@ -86,7 +86,7 @@ public class FileTest {
         JsonNode actual = new ObjectMapper().readTree(message.toJson());
         assertEquals(expected, actual);
 
-        OpenC2Command inMsg = JsonFormatter.readOpenC2Message(expect4);
+        OpenC2Command inMsg = JsonFormatter.readOpenC2Command(expect4);
         assertTrue(inMsg.getTarget() instanceof File);
         File inTarget = (File)inMsg.getTarget();
         assertEquals(NAME_VALUE, inTarget.getName());

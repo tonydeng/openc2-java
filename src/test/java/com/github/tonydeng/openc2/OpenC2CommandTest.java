@@ -92,7 +92,7 @@ public class OpenC2CommandTest {
     void testTest1Json() throws Exception {
 
         val message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE));
-        val message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        val message2 = JsonFormatter.readOpenC2Command(message.toJson());
 
         // Create JsonNode objects for comparison
         val messageJN = new ObjectMapper().readTree(message.toJson());
@@ -104,7 +104,7 @@ public class OpenC2CommandTest {
         assertEquals(messageJN, message3JN);  // Verify that the object from an external JSON string is the same
         assertNotEquals(messageJN, message4JN);
 
-        val inMsg = JsonFormatter.readOpenC2Message(test1Json);
+        val inMsg = JsonFormatter.readOpenC2Command(test1Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertNull(inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -119,7 +119,7 @@ public class OpenC2CommandTest {
 
         val message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE));
         message.setId(ID_VALUE);
-        val message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        val message2 = JsonFormatter.readOpenC2Command(message.toJson());
 
         // Create JsonNode objects for comparison
         val messageJN = new ObjectMapper().readTree(message.toJson());
@@ -132,7 +132,7 @@ public class OpenC2CommandTest {
         assertNotEquals(messageJN, message4JN); // Verify that two different objects are not equal
 
 
-        val inMsg = JsonFormatter.readOpenC2Message(test2Json);
+        val inMsg = JsonFormatter.readOpenC2Command(test2Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -148,7 +148,7 @@ public class OpenC2CommandTest {
         val message = new OpenC2Command(ActionType.COPY, new IpAddr(IP_VALUE));
         message.setId(ID_VALUE);
         message.setActuator(new Endpoint(ENDPOINT_VALUE));
-        val message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        val message2 = JsonFormatter.readOpenC2Command(message.toJson());
 
         // Create JsonNode objects for comparison
         val messageJN = new ObjectMapper().readTree(message.toJson());
@@ -161,7 +161,7 @@ public class OpenC2CommandTest {
         assertNotEquals(messageJN, message4JN); // Verify that two different objects are not equal
 
 
-        val inMsg = JsonFormatter.readOpenC2Message(test3Json);
+        val inMsg = JsonFormatter.readOpenC2Command(test3Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -182,7 +182,7 @@ public class OpenC2CommandTest {
         message.setArgs(new Args()
                 .addArg(ARG1_KEY, ARG1_VALUE)
                 .addArg(ARG2_KEY, ARG2_VALUE));
-        val message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        val message2 = JsonFormatter.readOpenC2Command(message.toJson());
 
         // Create JsonNode objects for comparison
         val messageJN = new ObjectMapper().readTree(message.toJson());
@@ -194,7 +194,7 @@ public class OpenC2CommandTest {
         assertEquals(messageJN, message3JN);  // Verify that the object from an external JSON string is the same
         assertNotEquals(messageJN, message4JN); // Verify that two different objects are not equal
 
-        val inMsg = JsonFormatter.readOpenC2Message(test4Json);
+        val inMsg = JsonFormatter.readOpenC2Command(test4Json);
         assertEquals(inMsg.getAction(), ActionType.COPY.toString());
         assertEquals(ID_VALUE, inMsg.getId());
         assertTrue(inMsg.getTarget() instanceof IpAddr);
@@ -215,7 +215,7 @@ public class OpenC2CommandTest {
                 .header(new Header(VERSION_VALUE, CONTENT_VALUE).setCommandId(ID_VALUE))
                 .build();
 
-        val message2 = JsonFormatter.readOpenC2Message(message.toJson());
+        val message2 = JsonFormatter.readOpenC2Command(message.toJson());
 
         // Create JsonNode objects for comparison
         val messageJN = new ObjectMapper().readTree(message.toJson());
@@ -228,7 +228,7 @@ public class OpenC2CommandTest {
         assertNotEquals(messageJN, message4JN); // Verify that two different objects are not equal
 
 
-        val inMsg = JsonFormatter.readOpenC2Message(test5Json);
+        val inMsg = JsonFormatter.readOpenC2Command(test5Json);
         assertTrue(inMsg.hasHeader());
         assertEquals(VERSION_VALUE, inMsg.getHeader().getVersion());
         assertEquals(ID_VALUE, inMsg.getHeader().getCommandId());
@@ -244,7 +244,7 @@ public class OpenC2CommandTest {
 
     @Test
     void testTest6() throws Exception {
-        var inMsg = JsonFormatter.readOpenC2Message(test6Json);
+        var inMsg = JsonFormatter.readOpenC2Command(test6Json);
 
         assertTrue(inMsg.hasHeader());
         assertEquals(VERSION_VALUE, inMsg.getHeader().getVersion());
@@ -265,9 +265,9 @@ public class OpenC2CommandTest {
 
         // Test to read target and actuators that are objects
         // Just reading the JSON string is success
-        inMsg = JsonFormatter.readOpenC2Message(test7Json);
+        inMsg = JsonFormatter.readOpenC2Command(test7Json);
         assertNotNull(inMsg);
-        inMsg = JsonFormatter.readOpenC2Message(test8Json);
+        inMsg = JsonFormatter.readOpenC2Command(test8Json);
         assertNotNull(inMsg);
     }
 
