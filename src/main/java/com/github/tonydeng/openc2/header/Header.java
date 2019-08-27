@@ -10,6 +10,11 @@ import org.apache.commons.lang3.StringUtils;
  **/
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode
 public class Header {
 
     /**
@@ -33,47 +38,22 @@ public class Header {
      */
     private String contentType;
 
-    public Header() {
-    }
-
-    public Header(String version, String contentType) {
-        this.version = version;
-        this.contentType = contentType;
-    }
-
-
-    public Header setVersion(String version) {
-        this.version = version;
-        return this;
-    }
 
     @JsonSetter("id")
-    public Header setCommandId(String commandId) {
+    public void setCommandId(@NonNull String commandId) {
         this.commandId = commandId;
-        return this;
     }
 
-
-    public Header setCreated(String created) {
-        this.created = created;
-        return this;
-    }
-
-    public Header setSender(String sender) {
-        this.sender = sender;
-        return this;
-    }
 
     @JsonSetter("content_type")
-    public Header setContentType(String contentType) {
+    public void setContentType(@NonNull String contentType) {
         this.contentType = contentType;
-        return this;
     }
 
     @JsonIgnore
     public final boolean isEmpty() {
-        return StringUtils.isEmpty(version)
-                && StringUtils.isEmpty(commandId) && StringUtils.isEmpty(created)
-                && StringUtils.isEmpty(sender) && StringUtils.isEmpty(contentType);
+        return StringUtils.isAllEmpty(
+                commandId, version, contentType, created, sender
+        );
     }
 }

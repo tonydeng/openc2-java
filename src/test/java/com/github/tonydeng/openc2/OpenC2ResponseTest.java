@@ -96,7 +96,7 @@ public class OpenC2ResponseTest {
         OpenC2Response response = OpenC2Response.builder().status(OK.getValue())
                 .id(RESP_ID).idRef("complete").statusText(STATUS_TEXT_VALUE)
                 .results(RESULTS_VALUE)
-                .header(new Header(VERSION_VALUE, CONTENT_VALUE).setCommandId(ID_VALUE))
+                .header(Header.builder().commandId(ID_VALUE).version(VERSION_VALUE).contentType(CONTENT_VALUE).build())
                 .build();
 
         val response2 = JsonFormatter.readOpenC2Response(response.toJson());

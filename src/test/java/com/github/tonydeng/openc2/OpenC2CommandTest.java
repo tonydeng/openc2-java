@@ -212,7 +212,7 @@ public class OpenC2CommandTest {
 
         val message = OpenC2Command.builder()
                 .action(ActionType.COPY).target(new IpAddr(IP_VALUE))
-                .header(new Header(VERSION_VALUE, CONTENT_VALUE).setCommandId(ID_VALUE))
+                .header(Header.builder().commandId(ID_VALUE).version(VERSION_VALUE).contentType(CONTENT_VALUE).build())
                 .build();
 
         val message2 = JsonFormatter.readOpenC2Command(message.toJson());

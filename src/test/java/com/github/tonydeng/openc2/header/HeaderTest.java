@@ -2,6 +2,7 @@ package com.github.tonydeng.openc2.header;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import lombok.var;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,9 +24,10 @@ public class HeaderTest {
 
     @Test
     void testEquals() {
-        val header = new Header().setCommandId(ID)
-                .setContentType(CONTENT).setVersion(VERSION)
-                .setCreated(CREATED).setSender(SENDER);
+        val header = Header.builder()
+                .commandId(ID).version(VERSION)
+                .contentType(CONTENT).created(CREATED)
+                .sender(SENDER).build();
 
         assertEquals(VERSION, header.getVersion());
         assertEquals(ID, header.getCommandId());
@@ -44,11 +46,14 @@ public class HeaderTest {
 
     @Test
     void testIsEmpty() {
-        Header header = new Header();
+        var header = new Header();
         assertTrue(header.isEmpty());
 
-        header = new Header().setVersion("")
-                .setCommandId("").setCreated("").setSender("");
+        header = Header.builder()
+                .commandId("").version("")
+                .contentType("").created("")
+                .build();
+
 
         assertTrue(header.isEmpty());
     }
