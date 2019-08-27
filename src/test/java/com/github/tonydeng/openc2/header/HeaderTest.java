@@ -69,10 +69,15 @@ public class HeaderTest {
         val header2 = new Header(ID, VERSION, CONTENT, CREATED, SENDER);
 
         assertTrue(header.equals(header2));
+        assertEquals(header.hashCode(), header2.hashCode());
 
         header2.setCommandId("abc");
         header2.setContentType(CONTENT2);
         header2.setVersion(VERSION2);
+
+        assertEquals("abc", header2.getCommandId());
+        assertEquals(CONTENT2, header2.getContentType());
+        assertEquals(VERSION2, header2.getVersion());
 
         assertFalse(header.equals(header2));
     }
@@ -81,6 +86,6 @@ public class HeaderTest {
     void testHashCode() {
         val header2 = new Header();
         assertNotNull(header2.hashCode());
-        log.info("{}", header2.hashCode());
+        assertEquals(new Header().hashCode(), header2.hashCode());
     }
 }
