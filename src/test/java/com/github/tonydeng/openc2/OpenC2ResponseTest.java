@@ -13,8 +13,7 @@ import java.io.IOException;
 
 import static com.github.tonydeng.openc2.utilities.StatusCode.BAD_REQUEST;
 import static com.github.tonydeng.openc2.utilities.StatusCode.OK;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author dengtao
@@ -53,6 +52,19 @@ public class OpenC2ResponseTest {
     }
 
     @Test
+    void testAllHasObjects() throws IOException {
+        val response = JsonFormatter.readOpenC2Response(expected1);
+
+        assertEquals(200, response.getStatus());
+
+        assertFalse(response.hasHeader());
+        assertFalse(response.hasStatusText());
+
+        assertFalse(response.hasResults());
+        assertNull(response.getResults());
+    }
+
+    @Test
     void test1() throws Exception {
 
         val response = OpenC2Response.builder().status(OK.getValue())
@@ -61,7 +73,6 @@ public class OpenC2ResponseTest {
 
         val response2 = JsonFormatter.readOpenC2Response(response.toJson());
         val response3 = JsonFormatter.readOpenC2Response(expected1);
-
 
         val responseJN = new ObjectMapper().readTree(response.toJson());
         val response2JN = new ObjectMapper().readTree(response2.toJson());
@@ -101,10 +112,6 @@ public class OpenC2ResponseTest {
 
         val response2 = JsonFormatter.readOpenC2Response(response.toJson());
         val response3 = JsonFormatter.readOpenC2Response(expected3);
-
-        log.info("response json \n {}", response.toPrettyJson());
-        log.info("response2 json \n {}", response2.toPrettyJson());
-        log.info("response3 json \n {}", response3.toPrettyJson());
 
         val responseJN = new ObjectMapper().readTree(response.toJson());
         val response2JN = new ObjectMapper().readTree(response2.toJson());

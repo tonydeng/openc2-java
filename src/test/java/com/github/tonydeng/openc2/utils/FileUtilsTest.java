@@ -20,7 +20,6 @@ public class FileUtilsTest {
     void testReadTest1() throws IOException {
         String test1 = FileUtils.readResourcesFile("command/test1.json");
         assertNotNull(test1);
-        log.info("{}", test1);
     }
 
     @ParameterizedTest
@@ -28,6 +27,5 @@ public class FileUtilsTest {
     void testWithJson(int arg) throws IOException {
         String json = FileUtils.readResourcesFile("command/test" + arg + ".json");
         assertNotNull(json);
-        log.info("{}", json);
     }
 }
