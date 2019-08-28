@@ -247,7 +247,7 @@
                         <include>**/*</include>
                     </includes>
                     <!-- 仓库名称 -->
-                    <repositoryName>openc2-java</repositoryName>
+                    <repositoryName>mvn-repo</repositoryName>
                     <!-- 仓库所有者 -->
                     <repositoryOwner>tonydeng</repositoryOwner>
                 </configuration>
