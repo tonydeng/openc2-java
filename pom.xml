@@ -9,6 +9,7 @@
     <name>openc2-java</name>
     <url>http://maven.apache.org</url>
     <properties>
+        <github.global.server>github-repo</github.global.server>
         <java.version>1.8</java.version>
         <env.encoding>UTF-8</env.encoding>
         <junit.jupiter.version>5.3.1</junit.jupiter.version>
@@ -165,6 +166,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>3.0.0-M1</version>
+                <configuration>
+                    <!-- 设置目录 -->
+                    <altDeploymentRepository>
+                        internal.repo::default::file://${project.build.directory}/mvn-repo
+                    </altDeploymentRepository>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -217,6 +224,35 @@
                             <encoding>UTF-8</encoding>
                             <failOnViolation>true</failOnViolation>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.version}</message>
+                    <!-- 仅用Jekyll处理-->
+                    <noJekyll>true</noJekyll>
+                    <!-- 部署目录，与maven-deploy-plugin的configuration.altDeploymentRepository对应 -->
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <!-- 推送的远程分支 -->
+                    <branch>refs/heads/master</branch>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <!-- 仓库名称 -->
+                    <repositoryName>openc2-java</repositoryName>
+                    <!-- 仓库所有者 -->
+                    <repositoryOwner>tonydeng</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
