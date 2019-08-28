@@ -3,14 +3,14 @@
     <groupId>com.github.tonydeng</groupId>
     <artifactId>openc2-java</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <name>openc2-java</name>
     <url>http://maven.apache.org</url>
     <scm>
         <url>https://github.com/tonydeng/openc2-java</url>
         <connection>scm:git:https://github.com/tonydeng/openc2-java.git</connection>
         <developerConnection>scm:git:https://github.com/tonydeng/openc2-java.git</developerConnection>
-      <tag>openc2-java-1.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <properties>
         <github.global.server>github-repo</github.global.server>
