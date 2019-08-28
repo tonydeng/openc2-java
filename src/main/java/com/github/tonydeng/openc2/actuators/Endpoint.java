@@ -10,7 +10,6 @@ import com.github.tonydeng.openc2.utilities.OpenC2Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 00:14
  **/
 public class Endpoint extends OpenC2Map<ActuatorType> {
 

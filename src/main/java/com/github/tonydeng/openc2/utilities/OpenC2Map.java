@@ -14,7 +14,6 @@ import java.util.Map;
  * @param <T> class type TargetType, ActuatorType or String (for args)
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-17 23:24
  **/
 @NoArgsConstructor
 public class OpenC2Map<T> {

@@ -11,7 +11,6 @@ import java.util.Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 20:36
  **/
 public class Artifact extends OpenC2Map<TargetType> {
 
@@ -46,8 +45,8 @@ public class Artifact extends OpenC2Map<TargetType> {
      * @return Artifact object used for method chaining
      */
     @JsonSetter(Keys.MIME_TYPE)
-    public Artifact setMime(String mine) {
-        super.put(Keys.MIME_TYPE, mine);
+    public Artifact setMime(String mime) {
+        super.put(Keys.MIME_TYPE, mime);
         return this;
     }
 

@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 12:00
  **/
 @Slf4j
 public class OpenC2CommandSerializer extends JsonSerializer<OpenC2Command> {

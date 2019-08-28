@@ -10,7 +10,6 @@ import static com.github.tonydeng.openc2.targets.TargetType.IP_ADDR;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 00:25
  **/
 public class IpAddr extends OpenC2Map<TargetType> {
 

@@ -61,7 +61,7 @@ public class OpenC2Command implements OpenC2Message {
     /**
      * Set Action Type Value, Not Type Name
      *
-     * @param action
+     * @param action Action Type Value
      */
     public void setAction(String action) {
         this.action = ActionType.valueOf(action.toUpperCase());

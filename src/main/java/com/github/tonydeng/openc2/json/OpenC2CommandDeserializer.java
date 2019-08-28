@@ -26,7 +26,6 @@ import static com.github.tonydeng.openc2.utilities.Keys.*;
 /**
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 15:27
  **/
 @Slf4j
 public class OpenC2CommandDeserializer extends JsonDeserializer<OpenC2Command> {

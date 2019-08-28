@@ -11,7 +11,6 @@ import java.util.Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 18:44
  **/
 public class File extends OpenC2Map<TargetType> {
     /**

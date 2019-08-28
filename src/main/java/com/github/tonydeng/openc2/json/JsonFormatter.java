@@ -16,7 +16,6 @@ import java.io.IOException;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 10:44
  **/
 public class JsonFormatter {
 

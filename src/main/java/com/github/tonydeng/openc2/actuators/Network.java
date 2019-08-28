@@ -8,7 +8,6 @@ import com.github.tonydeng.openc2.utilities.OpenC2Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 20:44
  **/
 public class Network extends OpenC2Map<ActuatorType> {
     /**

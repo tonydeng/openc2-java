@@ -8,7 +8,6 @@ import com.github.tonydeng.openc2.utilities.OpenC2Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 19:22
  **/
 public class DomainName extends OpenC2Map<TargetType> {
     public DomainName() {

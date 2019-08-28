@@ -12,7 +12,6 @@ import java.util.Map;
  *
  * @author Tony Deng
  * @version V1.0
- * @date 2019-08-18 15:59
  **/
 public class Args extends OpenC2Map<String> {
 
