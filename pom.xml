@@ -25,7 +25,7 @@
         <commons-text.vertsion>1.7</commons-text.vertsion>
         <jackson-core.version>2.9.9</jackson-core.version>
         <jackson-annotations.version>2.9.9</jackson-annotations.version>
-        <jackson-databind.version>2.9.9.3</jackson-databind.version>
+        <jackson-databind.version>2.9.10.1</jackson-databind.version>
     </properties>
     <dependencies>
         <dependency>
