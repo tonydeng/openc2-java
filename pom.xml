@@ -20,7 +20,7 @@
         <junit.platform.version>1.4.2</junit.platform.version>
         <lombok.version>1.18.8</lombok.version>
         <logback.version>1.2.3</logback.version>
-        <guava.version>21.0</guava.version>
+        <guava.version>24.1.1</guava.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-text.vertsion>1.7</commons-text.vertsion>
         <jackson-core.version>2.9.9</jackson-core.version>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
+            <version>[${guava.version},)</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -203,12 +203,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.0.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.29</version>
+                        <version>8.20</version>
                     </dependency>
                 </dependencies>
                 <configuration>
