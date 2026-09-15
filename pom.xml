@@ -19,7 +19,7 @@
         <junit.jupiter.version>5.3.1</junit.jupiter.version>
         <junit.platform.version>1.4.2</junit.platform.version>
         <lombok.version>1.18.8</lombok.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.2.13</logback.version>
         <guava.version>24.1.1</guava.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-text.vertsion>1.10.0</commons-text.vertsion>
